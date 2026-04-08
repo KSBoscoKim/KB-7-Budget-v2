@@ -4,6 +4,7 @@ import Calendar from '../components/Calendar.vue';
 import Filter from '@/components/Filter.vue';
 import FilterModal from '@/components/FilterModal.vue';
 import Transaction from '@/components/Transaction.vue';
+import AddTransactionFab from '@/components/AddTransactionFab.vue'
 
 const filterModalOpen = ref(false);
 const filterFocusSection = ref('date');
@@ -32,6 +33,7 @@ function openFilter(section) {
     >
       +
     </RouterLink>
+    <AddTransactionFab />
   </div>
 </template>
 

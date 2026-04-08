@@ -1,4 +1,16 @@
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue'
+import { useTransactionStore } from './stores/transaction'
+import { useUserStore } from './stores/user'
+
+const transactionStore = useTransactionStore()
+const userStore = useUserStore()
+
+onMounted(() => {
+  transactionStore.loadTransactionsFromServer()
+  userStore.loadCurrentUser()
+})
+</script>
 
 <template>
   <RouterView />

@@ -48,5 +48,39 @@
       { "id": "12", "type": "expense", "name": "교통/차량" },
       { "id": "13", "type": "expense", "name": "교육" },
       { "id": "14", "type": "expense", "name": "건강/피트니스" }
+    ],
+    "users": [
+      {
+        "id": "1",
+        "loginId": "plan_lee",
+        "username": "이계획",
+        "password": "demo1111",
+        "totalAmount": 3200000,
+        "spendingType": "계획형"
+      },
+      {
+        "id": "2",
+        "loginId": "flex_park",
+        "username": "박플렉스",
+        "password": "demo2222",
+        "totalAmount": 1800000,
+        "spendingType": "플렉스형"
+      },
+      {
+        "id": "3",
+        "loginId": "social_choi",
+        "username": "최사교",
+        "password": "demo3333",
+        "totalAmount": 2100000,
+        "spendingType": "사회형"
+      },
+      {
+        "id": "4",
+        "loginId": "drip_jung",
+        "username": "정가랑비",
+        "password": "demo4444",
+        "totalAmount": 950000,
+        "spendingType": "가랑비형"
+      }
     ]
   }

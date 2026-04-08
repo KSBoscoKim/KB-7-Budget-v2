@@ -5,6 +5,18 @@ import { useTransactionStore } from '@/stores/transaction'
 const transactionStore = useTransactionStore()
 const { groupedByDateDesc } = storeToRefs(transactionStore)
 
+async function onDelete(id, event) {
+  event.preventDefault()
+  event.stopPropagation()
+  if (!window.confirm('이 거래를 삭제할까요?')) return
+  try {
+    await transactionStore.removeTransaction(id)
+  } catch (e) {
+    console.error(e)
+    window.alert('삭제에 실패했습니다. json-server 실행 여부를 확인해 주세요.')
+  }
+}
+
 function formatSectionDate(isoDate) {
   const d = new Date(`${isoDate}T12:00:00`)
   return new Intl.DateTimeFormat('ko-KR', {
@@ -44,6 +56,19 @@ function typeLabel(type) {
             :class="`transaction-item--${tx.type}`"
           >
             <div class="transaction-item__top">
+              <RouterLink
+                class="transaction-edit"
+                :to="{ name: 'add-transaction', query: { id: tx.id } }"
+              >
+                수정
+              </RouterLink>
+              <button
+                type="button"
+                class="transaction-delete"
+                @click="onDelete(tx.id, $event)"
+              >
+                삭제
+              </button>
               <span class="transaction-type">{{ typeLabel(tx.type) }}</span>
             </div>
             <div class="transaction-item__body">
@@ -111,6 +136,25 @@ function typeLabel(type) {
   justify-content: flex-end;
   gap: 0.5rem;
   margin-bottom: 0.375rem;
+}
+
+.transaction-edit {
+  margin-right: auto;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.transaction-delete {
+  padding: 0.125rem 0.5rem;
+  border: 0;
+  border-radius: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #fff;
+  background: #ef4444;
+  cursor: pointer;
 }
 
 .transaction-type {
