@@ -72,11 +72,18 @@ const filteredGroupedData = computed(() => {
 
 <template>
   <div class="home">
+    <<<<<<< Updated upstream
     <!-- 계획형 유저 전용 예산 패널 -->
     <BudgetPanel v-if="isPlanner" />
     <!-- 사회형 유저 전용 탭 -->
     <SocialCustomTab v-if="isSocial" @filter-social="handleSocialFilter" />
     <!-- 필터 -->
+    =======
+    <!-- 계획형 유저 전용 다짐 출력소 -->
+    <ReceiptPledge v-if="isPlanner" />
+    <DrizzleType />
+
+    >>>>>>> Stashed changes
     <Filter
       @open-date="openFilter('date')"
       @open-category="openFilter('category')"

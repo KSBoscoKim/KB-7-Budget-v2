@@ -31,6 +31,22 @@
       "amount": 35000,
       "category": "교육",
       "memo": "Core JavaScript 책 구매"
+    },
+    {
+      "type": "income",
+      "date": "2026-04-01",
+      "amount": 1000,
+      "category": "용돈",
+      "memo": "",
+      "id": "w3FJxwC"
+    },
+    {
+      "type": "expense",
+      "date": "2026-04-08",
+      "amount": 15000,
+      "category": "문화생활",
+      "memo": "",
+      "id": "zNudMdj"
     }
   ],
   "categories": [
@@ -137,38 +153,6 @@
       "password": "demo4444",
       "totalAmount": 950000,
       "spendingType": "가랑비형"
-    },
-    {
-      "loginId": "12",
-      "password": "12",
-      "username": "12",
-      "totalAmount": 0,
-      "spendingType": "일반형",
-      "id": "ldMYP3F"
-    },
-    {
-      "loginId": "123",
-      "password": "123",
-      "username": "123",
-      "totalAmount": 0,
-      "spendingType": "일반형",
-      "id": "2pyDPJg"
-    },
-    {
-      "loginId": "1234",
-      "password": "1234",
-      "username": "1234",
-      "totalAmount": 0,
-      "spendingType": "일반형",
-      "id": "H5l4pCu"
-    },
-    {
-      "loginId": "1",
-      "password": "1",
-      "username": "1",
-      "totalAmount": 0,
-      "spendingType": "일반형",
-      "id": "yDguq3_"
     }
   ]
 }
