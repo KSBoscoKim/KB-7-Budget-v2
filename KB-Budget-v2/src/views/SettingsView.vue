@@ -1,10 +1,16 @@
 <script setup>
-import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
+const router = useRouter()
 const userStore = useUserStore()
 const { currentUser } = storeToRefs(userStore)
+
+function handleLogout() {
+  userStore.logout()
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -35,6 +41,8 @@ const { currentUser } = storeToRefs(userStore)
 
       <p v-else class="empty">유저 정보를 불러올 수 없습니다.</p>
     </div>
+
+    <button class="logout-btn" @click="handleLogout">로그아웃</button>
   </section>
 </template>
 
@@ -128,5 +136,23 @@ const { currentUser } = storeToRefs(userStore)
   margin: 0;
   font-size: 0.875rem;
   color: var(--color-text-secondary);
+}
+
+.logout-btn {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.875rem;
+  background: #fff;
+  border: 1px solid #ef4444;
+  border-radius: var(--radius-card);
+  color: #ef4444;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.logout-btn:hover {
+  background: #fff1f2;
 }
 </style>
