@@ -1,9 +1,11 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import seed from '../../db.json'
+import * as txApi from '../api/transactions'
 
 export const useTransactionStore = defineStore('transaction', () => {
   const transactions = ref(seed.transactions.map((t) => ({ ...t })))
+  const loadError = ref(null)
 
   /** YYYY-MM-DD, null이면 해당 끝 미적용 */
   const filterDateFrom = ref(null)
@@ -69,8 +71,42 @@ export const useTransactionStore = defineStore('transaction', () => {
     transactions.value = Array.isArray(rows) ? [...rows] : []
   }
 
+  async function loadTransactionsFromServer() {
+    loadError.value = null
+    try {
+      const rows = await txApi.fetchTransactions()
+      setTransactions(rows)
+    } catch (e) {
+      loadError.value = e
+      console.error(e)
+    }
+  }
+
+  async function createTransaction(payload) {
+    const created = await txApi.createTransaction(payload)
+    transactions.value = [...transactions.value, created]
+    return created
+  }
+
+  async function updateTransaction(id, payload) {
+    const updated = await txApi.updateTransaction(id, { ...payload, id })
+    const idx = transactions.value.findIndex((t) => String(t.id) === String(id))
+    if (idx !== -1) {
+      const next = [...transactions.value]
+      next[idx] = updated
+      transactions.value = next
+    }
+    return updated
+  }
+
+  async function removeTransaction(id) {
+    await txApi.deleteTransaction(id)
+    transactions.value = transactions.value.filter((t) => String(t.id) !== String(id))
+  }
+
   return {
     transactions,
+    loadError,
     filterDateFrom,
     filterDateTo,
     filterCategoryNames,
@@ -82,5 +118,9 @@ export const useTransactionStore = defineStore('transaction', () => {
     applyTransactionFilters,
     clearTransactionFilters,
     setTransactions,
+    loadTransactionsFromServer,
+    createTransaction,
+    updateTransaction,
+    removeTransaction,
   }
 })
