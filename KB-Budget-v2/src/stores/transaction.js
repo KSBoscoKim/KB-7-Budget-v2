@@ -1,76 +1,91 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-import seed from '../../db.json'
+import { ref, computed } from 'vue';
+import { defineStore } from 'pinia';
+import seed from '../../db.json';
 import * as txApi from '../api/transactions'
 
 export const useTransactionStore = defineStore('transaction', () => {
-  const transactions = ref(seed.transactions.map((t) => ({ ...t })))
-  const loadError = ref(null)
+  const transactions = ref(seed.transactions.map((t) => ({ ...t })));
+    const loadError = ref(null)
 
   /** YYYY-MM-DD, null이면 해당 끝 미적용 */
-  const filterDateFrom = ref(null)
-  const filterDateTo = ref(null)
+  const filterDateFrom = ref(null);
+  const filterDateTo = ref(null);
   /** 비어 있으면 카테고리 제한 없음. 값이 있으면 해당 이름만 */
-  const filterCategoryNames = ref([])
+  const filterCategoryNames = ref([]);
 
   const filteredTransactions = computed(() =>
     transactions.value.filter((tx) => {
-      if (filterDateFrom.value && tx.date < filterDateFrom.value) return false
-      if (filterDateTo.value && tx.date > filterDateTo.value) return false
+      if (filterDateFrom.value && tx.date < filterDateFrom.value) return false;
+      if (filterDateTo.value && tx.date > filterDateTo.value) return false;
       if (
         filterCategoryNames.value.length > 0 &&
         !filterCategoryNames.value.includes(tx.category)
       ) {
-        return false
+        return false;
       }
-      return true
-    }),
-  )
+      return true;
+    })
+  );
 
   const sortedByDateDesc = computed(() =>
     [...filteredTransactions.value].sort((a, b) => {
-      const byDate = b.date.localeCompare(a.date)
-      if (byDate !== 0) return byDate
-      return String(b.id).localeCompare(String(a.id), undefined, { numeric: true })
-    }),
-  )
+      const byDate = b.date.localeCompare(a.date);
+      if (byDate !== 0) return byDate;
+      return String(b.id).localeCompare(String(a.id), undefined, {
+        numeric: true,
+      });
+    })
+  );
 
   /** 날짜 내림차순 섹션: 같은 날짜 거래는 함께 묶음 */
   const groupedByDateDesc = computed(() => {
-    const sections = []
-    let currentDate = null
+    const sections = [];
+    let currentDate = null;
     for (const tx of sortedByDateDesc.value) {
       if (tx.date !== currentDate) {
-        currentDate = tx.date
-        sections.push({ date: tx.date, items: [] })
+        currentDate = tx.date;
+        sections.push({ date: tx.date, items: [] });
       }
-      sections[sections.length - 1].items.push(tx)
+      sections[sections.length - 1].items.push(tx);
     }
-    return sections
-  })
+    return sections;
+  });
 
   const hasDateFilter = computed(
-    () => filterDateFrom.value != null || filterDateTo.value != null,
-  )
+    () => filterDateFrom.value != null || filterDateTo.value != null
+  );
 
-  const hasCategoryFilter = computed(() => filterCategoryNames.value.length > 0)
+  const hasCategoryFilter = computed(
+    () => filterCategoryNames.value.length > 0
+  );
 
   function applyTransactionFilters({ dateFrom, dateTo, categoryNames }) {
-    filterDateFrom.value = dateFrom || null
-    filterDateTo.value = dateTo || null
-    filterCategoryNames.value = Array.isArray(categoryNames) ? [...categoryNames] : []
+    filterDateFrom.value = dateFrom || null;
+    filterDateTo.value = dateTo || null;
+    filterCategoryNames.value = Array.isArray(categoryNames)
+      ? [...categoryNames]
+      : [];
   }
 
   function clearTransactionFilters() {
-    filterDateFrom.value = null
-    filterDateTo.value = null
-    filterCategoryNames.value = []
+    filterDateFrom.value = null;
+    filterDateTo.value = null;
+    filterCategoryNames.value = [];
   }
 
   function setTransactions(rows) {
-    transactions.value = Array.isArray(rows) ? [...rows] : []
+    transactions.value = Array.isArray(rows) ? [...rows] : [];
   }
 
+  /** 달력용: 'YYYY-MM-DD' → 해당 날짜 거래 배열 */
+  const transactionsByDate = computed(() => {
+    const map = {};
+    transactions.value.forEach((tx) => {
+      if (!map[tx.date]) map[tx.date] = [];
+      map[tx.date].push(tx);
+    });
+    return map;
+  });
   async function loadTransactionsFromServer() {
     loadError.value = null
     try {
@@ -118,7 +133,8 @@ export const useTransactionStore = defineStore('transaction', () => {
     applyTransactionFilters,
     clearTransactionFilters,
     setTransactions,
-    loadTransactionsFromServer,
+  transactionsByDate,  
+  loadTransactionsFromServer,
     createTransaction,
     updateTransaction,
     removeTransaction,

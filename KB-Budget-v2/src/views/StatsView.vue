@@ -1,4 +1,5 @@
 <script setup>
+import Calendar from '@/components/Calendar.vue';
 import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useTransactionStore } from '@/stores/transaction'
@@ -57,7 +58,9 @@ watch(selectedMonth, () => {
 </script>
 
 <template>
-  <section class="stats-page">
+  <div class="page-placeholder">
+    
+    <section class="stats-page">
     <StatsMonthNav v-model="selectedMonth" />
 
     <StatsSummaryStrip
@@ -73,7 +76,10 @@ watch(selectedMonth, () => {
     />
 
     <StatsCategoryPieChart :slices="categoryTotalsForTab" :empty-hint="emptyHint" :size="300" />
-  </section>
+  </div>
+  <div>
+    <Calendar />
+  </div>
 </template>
 
 <style scoped>

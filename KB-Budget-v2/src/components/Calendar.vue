@@ -41,6 +41,22 @@
         <div class="date-number">{{ day.date }}</div>
         <div class="date-content">
           <!-- 여기에 소비/지출이 들어올 자리 -->
+          <template v-if="day.isCurrentMonth">
+            <template
+              v-for="tx in transactionStore.transactionsByDate[
+                toDateKey(day)
+              ] || []"
+              :key="tx.id"
+            >
+              <div :class="['tx-row', tx.type]">
+                <span class="dot"></span>
+                <span class="tx-amount">
+                  {{ tx.type === 'income' ? '+' : '-'
+                  }}{{ tx.amount.toLocaleString() }}
+                </span>
+              </div>
+            </template>
+          </template>
         </div>
       </button>
     </div>
@@ -50,7 +66,9 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useCalendarStore } from '../stores/calendar';
+import { useTransactionStore } from '@/stores/transaction';
 
+const transactionStore = useTransactionStore();
 const calendarStore = useCalendarStore();
 
 const currentYear = ref(new Date().getFullYear());
@@ -146,6 +164,13 @@ function goToToday() {
   currentYear.value = today.getFullYear();
   currentMonth.value = today.getMonth() + 1;
   calendarStore.setSelectedDate(today);
+}
+
+// day 객체를 'YYYY-MM-DD' 문자열로 변환 (transactionsByDate의 key 형식과 맞춤)
+function toDateKey(day) {
+  const mm = String(day.month).padStart(2, '0');
+  const dd = String(day.date).padStart(2, '0');
+  return `${day.year}-${mm}-${dd}`;
 }
 </script>
 
@@ -289,5 +314,52 @@ function goToToday() {
 .date-cell.selected.today {
   background: #2196f3;
   border: 2px solid #1565c0;
+}
+
+.tx-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tx-amount {
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 수입 - 파란색 */
+.tx-row.income .dot {
+  background: #2196f3;
+}
+.tx-row.income .tx-amount {
+  color: #2196f3;
+}
+
+/* 지출 - 빨간색 */
+.tx-row.expense .dot {
+  background: #f44336;
+}
+.tx-row.expense .tx-amount {
+  color: #f44336;
+}
+
+/* 선택된 날짜 칸에서는 글자색 흰색으로 덮어씀 */
+.date-cell.selected .tx-amount {
+  color: white;
+}
+.date-cell.selected .dot {
+  background: rgba(255, 255, 255, 0.8);
 }
 </style>
