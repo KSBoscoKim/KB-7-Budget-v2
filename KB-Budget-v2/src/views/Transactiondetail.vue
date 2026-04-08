@@ -224,19 +224,22 @@ function close() {
   backdrop-filter: blur(3px);
   z-index: 1000;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center; /* flex-end에서 center로 변경 */
+  padding: 20px; /* 화면 끝에 붙지 않도록 여백 추가 */
 }
 
 /* ── 패널 ── */
 .panel {
-  width: 420px;
-  max-width: 100vw;
-  height: 100%;
+  width: 100%;
+  max-width: 390px; /* 모바일 기준 */
+  height: 75vh; /* 화면의 75%만 차지 */
   background: #f8f7f4;
   display: flex;
   flex-direction: column;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  border-radius: 20px;
 }
 
 /* ── 헤더 ── */
