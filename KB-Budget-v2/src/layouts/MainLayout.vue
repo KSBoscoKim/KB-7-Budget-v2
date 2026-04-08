@@ -1,5 +1,6 @@
 <script setup>
 import AppTabBar from '../components/AppTabBar.vue'
+import HeaderMascot from '../components/HeaderMascot.vue'
 </script>
 
 <template>
@@ -11,12 +12,17 @@ import AppTabBar from '../components/AppTabBar.vue'
         <div class="app-header__orb app-header__orb--2" aria-hidden="true" />
         <div class="app-header__lines" aria-hidden="true" />
 
-        <!-- 브랜드 영역 -->
-        <div class="app-header__brand">
-          <span class="app-header__badge">MY BUDGET</span>
-          <h1 class="app-title">씀씀</h1>
-          <p class="app-tagline">스마트하게 기록하는 소비 습관</p>
+        <!-- 브랜드 -->
+        <div class="app-header__inner">
+          <div class="app-header__brand">
+            <span class="app-header__badge">MY BUDGET</span>
+            <h1 class="app-title">씀씀</h1>
+            <p class="app-tagline">스마트하게 기록하는 소비 습관</p>
+          </div>
         </div>
+
+        <!-- 토끼 마스코트 + 동전 애니메이션 -->
+        <HeaderMascot />
       </header>
 
       <main class="app-main">
@@ -30,7 +36,6 @@ import AppTabBar from '../components/AppTabBar.vue'
 
 <style scoped>
 .app-root {
-  /* 뷰포트를 꽉 채우되 절대 넘치지 않도록 고정 */
   height: 100%;
   height: 100dvh;
   overflow: hidden;
@@ -45,11 +50,10 @@ import AppTabBar from '../components/AppTabBar.vue'
 .app-shell {
   width: 100%;
   max-width: 430px;
-  /* height는 부모의 align-items: stretch 로 100% 자동 확장 */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* shell 자체는 스크롤 안 함 */
+  overflow: hidden;
   background: var(--color-bg-page);
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.04),
@@ -119,8 +123,8 @@ import AppTabBar from '../components/AppTabBar.vue'
   );
 }
 
-/* 브랜드 콘텐츠 */
-.app-header__brand {
+/* 브랜드 영역 */
+.app-header__inner {
   position: relative;
   z-index: 1;
 }
@@ -145,11 +149,10 @@ import AppTabBar from '../components/AppTabBar.vue'
   margin: 0 0 0.15rem;
   font-family: var(--font-wordmark);
   font-size: clamp(2.5rem, 14vw, 3.25rem);
-  font-weight: 400; /* Black Han Sans는 이미 heavy */
+  font-weight: 400;
   letter-spacing: 0.06em;
   line-height: 1;
   color: var(--color-brand-text);
-  /* 입체감 */
   text-shadow:
     0 1px 0 rgba(255, 255, 255, 0.55),
     0 2px 6px rgba(120, 53, 15, 0.2);
@@ -168,11 +171,10 @@ import AppTabBar from '../components/AppTabBar.vue'
 /* ── Main ────────────────────────────────── */
 .app-main {
   flex: 1;
-  min-height: 0;          /* flex 자식이 높이를 초과하지 않도록 */
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  /* 부드러운 스크롤 */
   scroll-behavior: smooth;
 }
 </style>
