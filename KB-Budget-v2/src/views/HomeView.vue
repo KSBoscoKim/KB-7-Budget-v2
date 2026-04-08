@@ -4,20 +4,32 @@ import { storeToRefs } from 'pinia';
 import Filter from '@/components/Filter.vue';
 import FilterModal from '@/components/FilterModal.vue';
 import Transaction from '@/components/Transaction.vue';
-import AddTransactionFab from '@/components/AddTransactionFab.vue';
-import BudgetPanel from '@/components/BudgetPanel.vue';
+import AddTransactionFab from '@/components/AddTransactionFab.vue'
+import ReceiptPledge from '@/components/ReceiptPledge.vue'
+import BudgetPanel from '@/components/BudgetPanel.vue';       // 플렉스형
+import SocialCustomTab from '@/components/SocialCustomTab.vue'; // 사회형
+import DrizzleType from '@/components/DrizzleType.vue';      // 보슬비형
 import { useUserStore } from '@/stores/user';
-import SocialCustomTab from '@/components/SocialCustomTab.vue';
 import { useTransactionStore } from '@/stores/transaction';
 
 const userStore = useUserStore();
 const { currentUser } = storeToRefs(userStore);
 
+
 const transactionStore = useTransactionStore();
 const { groupedByDateDesc } = storeToRefs(transactionStore);
 
-const isPlanner = computed(() => currentUser.value?.spendingType === '계획형');
-const isSocial = computed(() => currentUser.value?.spendingType === '사회형');
+/* 유형별 전용 컴포넌트 맵 — 컴포넌트 준비되면 import 후 여기에 추가 */
+const TYPE_COMPONENT_MAP = {
+  '계획형': ReceiptPledge,
+  '플렉스형': BudgetPanel,   // FlexPanel
+  '사회형': SocialCustomTab,   
+  '보슬비비형': DrizzleType,   // DripPanel
+}
+
+const typeComponent = computed(() =>
+  TYPE_COMPONENT_MAP[currentUser.value?.spendingType] ?? null
+)
 
 const filterModalOpen = ref(false);
 const filterFocusSection = ref('date');
@@ -72,18 +84,9 @@ const filteredGroupedData = computed(() => {
 
 <template>
   <div class="home">
-    <<<<<<< Updated upstream
-    <!-- 계획형 유저 전용 예산 패널 -->
-    <BudgetPanel v-if="isPlanner" />
-    <!-- 사회형 유저 전용 탭 -->
-    <SocialCustomTab v-if="isSocial" @filter-social="handleSocialFilter" />
-    <!-- 필터 -->
-    =======
-    <!-- 계획형 유저 전용 다짐 출력소 -->
-    <ReceiptPledge v-if="isPlanner" />
-    <DrizzleType />
+    <!-- 유형별 전용 패널 -->
+    <component :is="typeComponent" v-if="typeComponent" @filter-social="handleSocialFilter"  />
 
-    >>>>>>> Stashed changes
     <Filter
       @open-date="openFilter('date')"
       @open-category="openFilter('category')"
