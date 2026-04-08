@@ -31,7 +31,6 @@ function openFilter(section) {
       class="fab-link"
       aria-label="지출/수익 추가"
     >
-      +
     </RouterLink>
     <AddTransactionFab />
   </div>

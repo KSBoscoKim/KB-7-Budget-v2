@@ -5,12 +5,6 @@ import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
 const { currentUser } = storeToRefs(userStore)
-
-const totalLabel = computed(() => {
-  const n = currentUser.value?.totalAmount
-  if (n == null || Number.isNaN(Number(n))) return '—'
-  return `${new Intl.NumberFormat('ko-KR').format(Number(n))}원`
-})
 </script>
 
 <template>
@@ -35,10 +29,6 @@ const totalLabel = computed(() => {
           <div class="info__row">
             <dt>소비 유형</dt>
             <dd>{{ currentUser.spendingType }}</dd>
-          </div>
-          <div class="info__row">
-            <dt>총액</dt>
-            <dd>{{ totalLabel }}</dd>
           </div>
         </dl>
       </template>
