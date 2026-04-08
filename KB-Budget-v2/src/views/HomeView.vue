@@ -24,7 +24,7 @@ const TYPE_COMPONENT_MAP = {
   '계획형': ReceiptPledge,
   '플렉스형': BudgetPanel,   // FlexPanel
   '사회형': SocialCustomTab,   
-  '보슬비비형': DrizzleType,   // DripPanel
+  '보슬비형': DrizzleType,   // DripPanel
 }
 
 const typeComponent = computed(() =>
@@ -36,6 +36,8 @@ const filterFocusSection = ref('date');
 
 // 사회형 필터 상태 ('me' 또는 'others')
 const socialFilterMode = ref('me');
+
+const isSocial = computed(() => typeComponent.value === SocialCustomTab);
 
 // 현재 달 구하기 (YYYY-MM 형식)
 const currentMonth = computed(() => {
