@@ -11,7 +11,7 @@ import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
 const { currentUser } = storeToRefs(userStore)
 
-const isPlanner = computed(() => currentUser.value?.spendingType === '계획형')
+const isPlanner = computed(() => currentUser.value?.spendingType === '플렉스형')
 
 const filterModalOpen = ref(false);
 const filterFocusSection = ref('date');

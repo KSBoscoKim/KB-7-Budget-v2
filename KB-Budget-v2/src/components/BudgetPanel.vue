@@ -106,7 +106,7 @@ watch(currentUser, () => budgetStore.init())
     <!-- 헤더 -->
     <div class="bp-header">
       <div class="bp-header__left">
-        <span class="bp-badge">계획형</span>
+        <span class="bp-badge">플렉스형</span>
         <p class="bp-month">{{ monthLabel }} 예산</p>
       </div>
       <button class="bp-edit-btn" @click="openEdit" aria-label="예산 수정">
