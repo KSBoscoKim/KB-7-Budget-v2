@@ -61,12 +61,14 @@
       </button>
     </div>
   </div>
+  <TransactionDetail :isOpen="isDetailOpen" @close="isDetailOpen = false" />
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import { useCalendarStore } from '../stores/calendar';
 import { useTransactionStore } from '@/stores/transaction';
+import TransactionDetail from '../views/Transactiondetail.vue';
 
 const transactionStore = useTransactionStore();
 const calendarStore = useCalendarStore();
@@ -135,6 +137,9 @@ const calendarDates = computed(() => {
   return dates;
 });
 
+///달력 날짜 별 상세보기
+const isDetailOpen = ref(false);
+
 function previousMonth() {
   if (currentMonth.value === 1) {
     currentYear.value--;
@@ -156,6 +161,8 @@ function nextMonth() {
 function selectDate(day) {
   if (day.isCurrentMonth) {
     calendarStore.setSelectedDate(day.fullDate);
+    //날짜 클릭 시 열리는 상세 내역(0408 이아영)
+    isDetailOpen.value = true;
   }
 }
 
