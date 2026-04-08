@@ -5,7 +5,7 @@ import Filter from '@/components/Filter.vue';
 import FilterModal from '@/components/FilterModal.vue';
 import Transaction from '@/components/Transaction.vue';
 import AddTransactionFab from '@/components/AddTransactionFab.vue'
-import BudgetPanel from '@/components/BudgetPanel.vue'
+import ReceiptPledge from '@/components/ReceiptPledge.vue'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
@@ -24,8 +24,8 @@ function openFilter(section) {
 
 <template>
   <div class="home">
-    <!-- 계획형 유저 전용 예산 패널 -->
-    <BudgetPanel v-if="isPlanner" />
+    <!-- 계획형 유저 전용 다짐 출력소 -->
+    <ReceiptPledge v-if="isPlanner" />
 
     <Filter
       @open-date="openFilter('date')"
