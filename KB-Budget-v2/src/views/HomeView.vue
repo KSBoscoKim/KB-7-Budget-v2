@@ -1,10 +1,17 @@
 <script setup>
-import { ref } from 'vue';
-import Calendar from '../components/Calendar.vue';
+import { ref, computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import Filter from '@/components/Filter.vue';
 import FilterModal from '@/components/FilterModal.vue';
 import Transaction from '@/components/Transaction.vue';
 import AddTransactionFab from '@/components/AddTransactionFab.vue'
+import BudgetPanel from '@/components/BudgetPanel.vue'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+const { currentUser } = storeToRefs(userStore)
+
+const isPlanner = computed(() => currentUser.value?.spendingType === '계획형')
 
 const filterModalOpen = ref(false);
 const filterFocusSection = ref('date');
@@ -17,6 +24,9 @@ function openFilter(section) {
 
 <template>
   <div class="home">
+    <!-- 계획형 유저 전용 예산 패널 -->
+    <BudgetPanel v-if="isPlanner" />
+
     <Filter
       @open-date="openFilter('date')"
       @open-category="openFilter('category')"

@@ -41,12 +41,12 @@
       "id": "JNmBqS-"
     },
     {
-      "type": "income",
-      "date": "2026-04-01",
-      "amount": 1000,
-      "category": "용돈",
+      "type": "expense",
+      "date": "2026-04-08",
+      "amount": 1000000,
+      "category": "주거/통신",
       "memo": "",
-      "id": "w3FJxwC"
+      "id": "ojPoN1Y"
     }
   ],
   "categories": [
