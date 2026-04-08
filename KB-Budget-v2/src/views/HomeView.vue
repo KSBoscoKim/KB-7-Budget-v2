@@ -26,21 +26,16 @@ function openFilter(section) {
       v-model="filterModalOpen"
       :focus-section="filterFocusSection"
     />
-    <RouterLink
-      :to="{ name: 'add-transaction' }"
-      class="fab-link"
-      aria-label="지출/수익 추가"
-    >
-    </RouterLink>
     <AddTransactionFab />
   </div>
 </template>
 
 <style scoped>
 .home {
-  min-height: 100%;
+  /* app-main의 스크롤 영역을 자연스럽게 채움 */
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 1rem;
+  padding: 1rem 0 1.25rem;
+  background: var(--color-bg-page);
 }
 </style>

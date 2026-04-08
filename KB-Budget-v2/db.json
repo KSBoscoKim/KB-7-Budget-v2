@@ -33,6 +33,14 @@
       "memo": "Core JavaScript 책 구매"
     },
     {
+      "type": "expense",
+      "date": "2026-04-08",
+      "amount": 12345,
+      "category": "생활용품",
+      "memo": "test",
+      "id": "JNmBqS-"
+    },
+    {
       "type": "income",
       "date": "2026-04-01",
       "amount": 1000,

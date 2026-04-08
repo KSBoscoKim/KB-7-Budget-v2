@@ -95,33 +95,24 @@ watch(selectedMonth, () => {
 .stats-page {
   max-width: 430px;
   margin: 0 auto;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background: #fff;
+  padding: 0.75rem 0.65rem 1rem;
+  background: var(--color-bg-page);
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 .stats-panel {
-  flex-grow: 1;
-  flex-shrink: 0;
-  flex-basis: auto;
+  margin-bottom: 0.75rem;
+  background: var(--color-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-card);
+  padding: 0.5rem 0.5rem 0.25rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding-bottom: 16px;
-  overflow: visible;
 }
 
 .calendar-panel {
-  flex-grow: 3;
-  flex-shrink: 0;
-  flex-basis: auto;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
+  margin-top: 0.25rem;
 }
 </style>

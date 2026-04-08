@@ -43,7 +43,8 @@ const emit = defineEmits(['update:activeTab'])
 .tab-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border-light);
+  gap: 0;
 }
 
 .tab-bar__btn {
@@ -51,34 +52,53 @@ const emit = defineEmits(['update:activeTab'])
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.15rem;
-  padding: 0.45rem 0.5rem 0.4rem;
+  gap: 0.2rem;
+  padding: 0.65rem 0.5rem 0.5rem;
   border: none;
   background: transparent;
   cursor: pointer;
-  color: #9ca3af;
+  color: var(--color-text-muted);
+  font-family: var(--font-display);
   font-weight: 600;
   position: relative;
-  transition: color 0.15s ease;
+  transition: color 0.2s ease;
 }
 
 .tab-bar__btn--active {
-  color: #111827;
+  color: var(--color-brand-deep);
+}
+
+.tab-bar__btn:nth-child(1).tab-bar__btn--active {
+  color: var(--color-income);
+}
+
+.tab-bar__btn:nth-child(2).tab-bar__btn--active {
+  color: var(--color-expense);
 }
 
 .tab-bar__btn--active::after {
   content: '';
   position: absolute;
   bottom: 0;
-  left: 12%;
-  right: 12%;
-  height: 2px;
-  background: #ef4444;
-  border-radius: 2px 2px 0 0;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  border-radius: 4px 4px 0 0;
+  background: var(--gradient-brand);
+}
+
+.tab-bar__btn:nth-child(1).tab-bar__btn--active::after {
+  background: linear-gradient(90deg, #0f766e, #2dd4bf);
+}
+
+.tab-bar__btn:nth-child(2).tab-bar__btn--active::after {
+  background: var(--gradient-brand);
 }
 
 .tab-bar__name {
-  font-size: 0.8125rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .tab-bar__amount {

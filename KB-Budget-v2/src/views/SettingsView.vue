@@ -43,18 +43,26 @@ const { currentUser } = storeToRefs(userStore)
   max-width: 420px;
   margin: 0 auto;
   padding: 1rem;
+  background: var(--color-bg-page);
+  box-sizing: border-box;
 }
 
 .title {
   margin: 0 0 1rem;
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
 }
 
 .card {
-  padding: 1rem;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
+  padding: 1.125rem 1rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
 .card__head {
@@ -66,9 +74,10 @@ const { currentUser } = storeToRefs(userStore)
 }
 
 .card__label {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
 }
 
 .info {
@@ -79,8 +88,8 @@ const { currentUser } = storeToRefs(userStore)
   display: grid;
   grid-template-columns: 5.5rem 1fr;
   gap: 0.5rem 0.75rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f3f4f6;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--color-border-light);
   font-size: 0.875rem;
 }
 
@@ -90,13 +99,15 @@ const { currentUser } = storeToRefs(userStore)
 
 .info__row dt {
   margin: 0;
-  color: #6b7280;
-  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
 }
 
 .info__row dd {
   margin: 0;
-  color: #111827;
+  color: var(--color-text);
   font-weight: 600;
   text-align: right;
   word-break: break-all;
@@ -105,7 +116,7 @@ const { currentUser } = storeToRefs(userStore)
 .hint {
   margin: 0.75rem 0 0;
   font-size: 0.75rem;
-  color: #b45309;
+  color: var(--color-expense);
   line-height: 1.45;
 }
 
@@ -116,6 +127,6 @@ const { currentUser } = storeToRefs(userStore)
 .empty {
   margin: 0;
   font-size: 0.875rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
 }
 </style>

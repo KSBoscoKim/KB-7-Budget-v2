@@ -234,12 +234,13 @@ function close() {
   width: 100%;
   max-width: 390px; /* 모바일 기준 */
   height: 75vh; /* 화면의 75%만 차지 */
-  background: #f8f7f4;
+  background: var(--color-bg-page);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border-light);
 }
 
 /* ── 헤더 ── */
@@ -248,9 +249,10 @@ function close() {
   align-items: center;
   gap: 12px;
   padding: 24px 20px 20px;
-  background: #1a1a2e;
+  background: var(--gradient-brand);
   color: white;
   flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.25);
 }
 
 .header-left {
@@ -313,10 +315,10 @@ function close() {
 }
 
 .income .summary-amount {
-  color: #4ade80;
+  color: #b8fff0;
 }
 .expense .summary-amount {
-  color: #f87171;
+  color: #ffe4d6;
 }
 
 .divider-v {
@@ -412,13 +414,13 @@ function close() {
 }
 
 .income-header {
-  background: #f0fdf4;
-  border-left: 3px solid #22c55e;
+  background: rgba(13, 148, 136, 0.1);
+  border-left: 3px solid var(--color-income);
 }
 
 .expense-header {
-  background: #fff1f2;
-  border-left: 3px solid #ef4444;
+  background: rgba(245, 158, 11, 0.1);
+  border-left: 3px solid var(--color-expense);
 }
 
 .section-icon {
@@ -448,11 +450,11 @@ function close() {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: white;
-  border-radius: 12px;
+  background: var(--color-bg);
+  border-radius: 14px;
   padding: 14px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  border: 1px solid #eeede9;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-light);
   animation: slideIn 0.35s ease both;
   transition:
     transform 0.15s,
@@ -461,15 +463,15 @@ function close() {
 
 .card:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .income-card {
-  border-left: 3px solid #22c55e;
+  border-left: 3px solid var(--color-income);
 }
 
 .expense-card {
-  border-left: 3px solid #ef4444;
+  border-left: 3px solid var(--color-expense);
 }
 
 .card-icon-wrap {
@@ -484,10 +486,10 @@ function close() {
 }
 
 .income-icon-bg {
-  background: #f0fdf4;
+  background: var(--color-income-soft);
 }
 .expense-icon-bg {
-  background: #fff1f2;
+  background: var(--color-expense-soft);
 }
 
 .card-body {
@@ -506,7 +508,7 @@ function close() {
 .card-name {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -526,11 +528,11 @@ function close() {
 
 .card-category {
   font-size: 11px;
-  color: #888;
-  background: #f3f2ef;
+  color: var(--color-text-secondary);
+  background: #f2f2f7;
   padding: 2px 8px;
   border-radius: 20px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .card-time {
@@ -549,21 +551,22 @@ function close() {
 
 /* ── 색상 ── */
 .income-text {
-  color: #16a34a;
+  color: var(--color-income);
 }
 .expense-text {
-  color: #dc2626;
+  color: var(--color-expense);
 }
 
 /* ── 푸터 ── */
 .panel-footer {
   padding: 16px 20px;
-  background: #1a1a2e;
+  background: var(--gradient-brand);
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  box-shadow: 0 -4px 16px rgba(245, 158, 11, 0.2);
 }
 
 .footer-label {

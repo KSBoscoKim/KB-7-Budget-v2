@@ -31,11 +31,10 @@ defineProps({
   border-radius: 50%;
   text-decoration: none;
   color: #fff;
-  background: linear-gradient(145deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+  background: var(--gradient-brand);
   box-shadow:
-    0 4px 14px rgba(37, 99, 235, 0.45),
-    0 2px 6px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    var(--shadow-fab),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease,
@@ -46,21 +45,21 @@ defineProps({
 .fab:hover {
   filter: brightness(1.06);
   box-shadow:
-    0 6px 20px rgba(37, 99, 235, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    0 8px 28px rgba(245, 158, 11, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .fab:active {
   transform: scale(0.94);
   filter: brightness(0.96);
   box-shadow:
-    0 2px 10px rgba(37, 99, 235, 0.35),
-    inset 0 2px 4px rgba(0, 0, 0, 0.12);
+    0 2px 12px rgba(245, 158, 11, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .fab:focus-visible {
-  outline: 2px solid #93c5fd;
+  outline: 2px solid rgba(255, 180, 120, 0.9);
   outline-offset: 3px;
 }
 

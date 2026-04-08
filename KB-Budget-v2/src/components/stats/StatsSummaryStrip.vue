@@ -28,9 +28,8 @@ defineProps({
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 0.35rem;
-  padding: 0.5rem 0 0.65rem;
-  border-top: 1px solid #f3f4f6;
-  border-bottom: 1px solid #f3f4f6;
+  padding: 0.65rem 0.25rem 0.75rem;
+  border-top: 1px solid var(--color-border-light);
 }
 
 .summary-strip__col {
@@ -42,27 +41,31 @@ defineProps({
 }
 
 .summary-strip__label {
-  font-size: 0.6875rem;
-  color: #9ca3af;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
 }
 
 .summary-strip__value {
+  font-family: var(--font-display);
   font-size: 0.8125rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-tight);
   font-variant-numeric: tabular-nums;
 }
 
 .summary-strip__value--income {
-  color: #2563eb;
+  color: var(--color-income);
 }
 
 .summary-strip__value--expense {
-  color: #ea580c;
+  color: var(--color-expense);
 }
 
 .summary-strip__value--net {
-  color: #111827;
+  color: var(--color-text);
 }
 </style>

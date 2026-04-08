@@ -66,7 +66,7 @@ const hasData = computed(() => pieSlices.value.length > 0);
             :y1="slice.line.y1"
             :x2="slice.line.x2"
             :y2="slice.line.y2"
-            stroke="#d1d5db"
+            stroke="#e8e8ed"
             stroke-width="0.9"
           />
           <text
@@ -92,8 +92,8 @@ const hasData = computed(() => pieSlices.value.length > 0);
 
 <style scoped>
 .chart-panel {
-  padding: 0.5rem 0 0;
-  background: #fff;
+  padding: 0.35rem 0 0;
+  background: transparent;
 }
 
 .chart-svg-wrap {
@@ -112,12 +112,12 @@ const hasData = computed(() => pieSlices.value.length > 0);
 .chart-label {
   font-size: 10px;
   font-weight: 600;
-  fill: #374151;
+  fill: #3a3a3c;
 }
 
 .chart-label__pct {
   font-weight: 500;
-  fill: #6b7280;
+  fill: #8e8e93;
   font-size: 9px;
 }
 
@@ -126,7 +126,7 @@ const hasData = computed(() => pieSlices.value.length > 0);
   padding: 1.25rem 0.75rem;
   text-align: center;
   font-size: 0.8125rem;
-  color: #9ca3af;
+  color: var(--color-text-secondary);
   line-height: 1.45;
 }
 </style>

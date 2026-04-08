@@ -216,13 +216,13 @@ watch(
 
 <style scoped>
 .calendar {
-  height: 100%; /* 부모(.calendar-panel)의 높이를 100% 사용 */
   display: flex;
   flex-direction: column;
-  padding: 10px; /* 패딩을 적절히 조절 */
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px 16px 20px;
+  background: var(--color-bg);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-light);
   box-sizing: border-box;
 }
 
@@ -230,57 +230,66 @@ watch(
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   gap: 8px;
 }
 
 .month-year {
   margin: 0;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 1.125rem;
+  font-weight: 700;
   flex: 1;
   text-align: center;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
 }
 
 .nav-btn {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  background: white;
-  border-radius: 4px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  background: #fafafa;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  font-size: 16px;
-  transition: background 0.2s;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .nav-btn:hover {
-  background: #f0f0f0;
+  background: #fff;
+  border-color: rgba(245, 158, 11, 0.35);
+  color: var(--color-expense);
 }
 
 .today-btn {
-  padding: 8px 14px;
-  border: 1px solid #2196f3;
-  background: #e3f2fd;
-  color: #2196f3;
-  border-radius: 4px;
+  padding: 10px 18px;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(255, 154, 77, 0.12);
+  color: var(--color-expense);
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   transition: all 0.2s;
 }
 
 .today-btn:hover {
-  background: #bbdefb;
-  border-color: #1976d2;
+  background: rgba(255, 154, 77, 0.2);
+  border-color: var(--color-expense);
 }
 
 .selected-date-display {
   text-align: center;
-  padding: 12px;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-input);
+  font-size: 0.9375rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
 }
 
 .weekdays {
@@ -292,36 +301,40 @@ watch(
 
 .weekday {
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   padding: 4px 0;
-  font-size: 11px;
-  color: #666;
+  font-size: 0.6875rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .dates-grid {
-  flex: 1; /* 헤더 등을 제외한 남은 높이 전체 사용 */
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr); /* 6줄을 동일한 비율로 나눔 */
-  gap: 2px;
-  min-height: 0;
+  grid-auto-rows: minmax(62px, auto);
+  gap: 4px;
 }
 
 .date-cell {
-  height: auto; /* 기존 80px 제거 */
-  min-height: 0; /* 셀이 부모 높이에 맞춰 줄어들도록 허용 */
-  border: 1px solid #e0e0e0;
-  background: white;
-  border-radius: 4px;
+  min-height: 62px;
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
   display: flex;
   flex-direction: column;
   padding: 2px;
-  overflow: hidden; /* 내용이 넘치면 숨김 */
+  overflow: hidden;
 }
 
 .date-number {
-  font-size: 11px; /* 크기 약간 축소 */
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: var(--color-text);
 }
 
 .date-content {
@@ -334,33 +347,37 @@ watch(
 }
 
 .date-cell:hover:not(.other-month) {
-  background: #f5f5f5;
-  border-color: #999;
+  background: #fafafa;
+  border-color: rgba(245, 158, 11, 0.25);
 }
 
 .date-cell.other-month {
-  color: #ccc;
-  background: #fafafa;
+  color: #c7c7cc;
+  background: #f7f7f8;
   cursor: not-allowed;
 }
 
 .date-cell.today {
-  background: white;
-  border: 2px solid #2196f3;
-  color: #2196f3;
-  font-weight: 600;
+  background: #fff;
+  border: 2px solid rgba(245, 158, 11, 0.65);
+  color: var(--color-expense);
+  font-weight: 700;
 }
 
 .date-cell.selected {
-  background: #2196f3;
-  color: white;
-  border: 2px solid #2196f3;
-  font-weight: 600;
+  background: var(--gradient-brand);
+  color: #fff;
+  border: 2px solid transparent;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+}
+
+.date-cell.selected .date-number {
+  color: #fff;
 }
 
 .date-cell.selected.today {
-  background: #2196f3;
-  border: 2px solid #1565c0;
+  border: 2px solid rgba(255, 255, 255, 0.45);
 }
 
 .tx-row {
@@ -385,27 +402,24 @@ watch(
   letter-spacing: -0.5px;
 }
 
-/* 수입 - 파란색 */
 .tx-row.income .dot {
-  background: #2196f3;
+  background: var(--color-income);
 }
 .tx-row.income .tx-amount {
-  color: #2196f3;
+  color: var(--color-income);
 }
 
-/* 지출 - 빨간색 */
 .tx-row.expense .dot {
-  background: #f44336;
+  background: var(--color-expense);
 }
 .tx-row.expense .tx-amount {
-  color: #f44336;
+  color: var(--color-expense);
 }
 
-/* 선택된 날짜 칸에서는 글자색 흰색으로 덮어씀 */
 .date-cell.selected .tx-amount {
-  color: white;
+  color: #fff;
 }
 .date-cell.selected .dot {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
 }
 </style>

@@ -187,20 +187,28 @@ async function deleteTx() {
   max-width: 420px;
   margin: 0 auto;
   padding: 1rem;
+  background: var(--color-bg-page);
+  box-sizing: border-box;
 }
 
 .title {
   margin: 0 0 1rem;
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-text);
 }
 
 .entry-form {
   display: grid;
   gap: 0.875rem;
-  padding: 1rem;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
+  padding: 1.125rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
 }
 
 .type-group {
@@ -212,6 +220,7 @@ async function deleteTx() {
 .type-option {
   margin-right: 1rem;
   font-size: 0.95rem;
+  color: var(--color-text);
 }
 
 .field-row {
@@ -220,18 +229,32 @@ async function deleteTx() {
 }
 
 .field-label {
-  font-size: 0.875rem;
-  color: #4b5563;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .field-input {
   width: 100%;
   box-sizing: border-box;
-  min-height: 2.5rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
   font-size: 0.95rem;
+  background: #fafafa;
+  color: var(--color-text);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: var(--shadow-focus-ring);
   background: #fff;
 }
 
@@ -248,19 +271,35 @@ async function deleteTx() {
 }
 
 .action-btn {
-  min-height: 2.625rem;
+  min-height: 2.875rem;
   border: 0;
-  border-radius: 0.625rem;
-  font-size: 0.95rem;
-  font-weight: 600;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: #fff;
+  cursor: pointer;
+  transition: filter 0.15s;
 }
 
 .save-btn {
-  background: #2563eb;
+  background: var(--gradient-brand);
+  box-shadow: var(--shadow-glow-brand);
+}
+
+.save-btn:hover {
+  filter: brightness(1.05);
 }
 
 .delete-btn {
-  background: #ef4444;
+  background: #fff;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.delete-btn:hover {
+  border-color: rgba(220, 38, 38, 0.45);
+  color: #dc2626;
 }
 </style>

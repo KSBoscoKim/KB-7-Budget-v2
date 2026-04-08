@@ -49,31 +49,37 @@ function shift(delta) {
 }
 
 .month-nav__btn {
-  width: 2rem;
-  height: 2rem;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0;
-  border: none;
-  background: transparent;
-  font-size: 1.35rem;
+  border: 1px solid var(--color-border);
+  background: #fafafa;
+  font-size: 1.25rem;
   line-height: 1;
-  color: #6b7280;
+  color: var(--color-text-secondary);
   cursor: pointer;
-  border-radius: 0.375rem;
-  transition: background 0.15s ease;
+  border-radius: var(--radius-pill);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
   flex-shrink: 0;
 }
 
 .month-nav__btn:hover {
-  background: #f3f4f6;
+  background: #fff;
+  border-color: rgba(245, 158, 11, 0.35);
+  color: var(--color-expense);
 }
 
 .month-nav__title {
   min-width: 7.5rem;
   text-align: center;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #111827;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
   user-select: none;
 }
 </style>
