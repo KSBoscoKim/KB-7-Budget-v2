@@ -18,11 +18,15 @@ html,
 body {
   margin: 0;
   height: 100%;
+  height: 100dvh;
+  overflow: hidden; /* 브라우저 자체 스크롤 차단 */
   -webkit-tap-highlight-color: transparent;
 }
 
 #app {
   height: 100%;
+  height: 100dvh;
+  overflow: hidden;
 }
 
 body {

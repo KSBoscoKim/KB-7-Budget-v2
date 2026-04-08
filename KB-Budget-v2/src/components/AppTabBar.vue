@@ -13,7 +13,7 @@ const tabs = [
       :key="tab.name"
       :to="{ name: tab.name }"
       class="tab-link"
-      active-class="tab-link--active"
+      exact-active-class="tab-link--active"
     >
       <!-- 활성 인디케이터 -->
       <span class="tab-link__dot" aria-hidden="true" />

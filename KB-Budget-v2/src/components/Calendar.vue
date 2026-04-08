@@ -216,7 +216,6 @@ watch(
 
 <style scoped>
 .calendar {
-  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 18px 16px 20px;
@@ -311,17 +310,14 @@ watch(
 }
 
 .dates-grid {
-  flex: 1;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-auto-rows: minmax(62px, auto);
   gap: 4px;
-  min-height: 0;
 }
 
 .date-cell {
-  height: auto;
-  min-height: 0;
+  min-height: 62px;
   border: 1px solid var(--color-border-light);
   background: var(--color-bg);
   border-radius: 12px;

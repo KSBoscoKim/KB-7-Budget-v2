@@ -32,7 +32,7 @@ function openFilter(section) {
 
 <style scoped>
 .home {
-  min-height: 100%;
+  /* app-main의 스크롤 영역을 자연스럽게 채움 */
   display: flex;
   flex-direction: column;
   padding: 1rem 0 1.25rem;

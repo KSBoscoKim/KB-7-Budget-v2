@@ -188,7 +188,6 @@ async function deleteTx() {
   margin: 0 auto;
   padding: 1rem;
   background: var(--color-bg-page);
-  min-height: 100%;
   box-sizing: border-box;
 }
 

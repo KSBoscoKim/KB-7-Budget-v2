@@ -30,8 +30,10 @@ import AppTabBar from '../components/AppTabBar.vue'
 
 <style scoped>
 .app-root {
-  min-height: 100%;
-  min-height: 100dvh;
+  /* 뷰포트를 꽉 채우되 절대 넘치지 않도록 고정 */
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -43,11 +45,11 @@ import AppTabBar from '../components/AppTabBar.vue'
 .app-shell {
   width: 100%;
   max-width: 430px;
-  min-height: 100%;
-  min-height: 100dvh;
+  /* height는 부모의 align-items: stretch 로 100% 자동 확장 */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* shell 자체는 스크롤 안 함 */
   background: var(--color-bg-page);
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.04),
@@ -166,8 +168,11 @@ import AppTabBar from '../components/AppTabBar.vue'
 /* ── Main ────────────────────────────────── */
 .app-main {
   flex: 1;
-  min-height: 0;
-  overflow: auto;
+  min-height: 0;          /* flex 자식이 높이를 초과하지 않도록 */
+  overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  /* 부드러운 스크롤 */
+  scroll-behavior: smooth;
 }
 </style>

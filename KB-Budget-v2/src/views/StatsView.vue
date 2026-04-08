@@ -98,13 +98,9 @@ watch(selectedMonth, () => {
   padding: 0.75rem 0.65rem 1rem;
   background: var(--color-bg-page);
   box-sizing: border-box;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .stats-panel {
-  flex-shrink: 0;
   margin-bottom: 0.75rem;
   background: var(--color-bg);
   border-radius: var(--radius-card);
@@ -117,10 +113,6 @@ watch(selectedMonth, () => {
 }
 
 .calendar-panel {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
   margin-top: 0.25rem;
 }
 </style>
