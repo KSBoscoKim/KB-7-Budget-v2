@@ -1,6 +1,15 @@
 {
   "transactions": [
     {
+      "id": "1",
+      "userId": "1",
+      "type": "income",
+      "date": "2026-04-01",
+      "amount": 150000,
+      "category": "금융소득",
+      "memo": "미국 주식 배당금 입금"
+    },
+    {
       "id": "2",
       "userId": "2",
       "type": "expense",
@@ -102,6 +111,33 @@
       "category": "경조사/회비",
       "memo": "",
       "id": "pH-9d5u"
+    },
+    {
+      "userId": "3",
+      "type": "expense",
+      "date": "2026-04-09",
+      "amount": 4545,
+      "category": "문화생활",
+      "memo": "",
+      "id": "GgjgzVC"
+    },
+    {
+      "userId": "2",
+      "type": "expense",
+      "date": "2026-04-09",
+      "amount": 455555,
+      "category": "경조사/회비",
+      "memo": "",
+      "id": "X9e5Vvu"
+    },
+    {
+      "userId": "2",
+      "type": "expense",
+      "date": "2026-04-09",
+      "amount": 9000,
+      "category": "생활용품",
+      "memo": "",
+      "id": "DF7NBlR"
     }
   ],
   "categories": [
@@ -183,9 +219,7 @@
       "username": "이계획",
       "password": "demo1111",
       "totalAmount": 3200000,
-      "spendingType": "보슬비형",
-      "expectedIncome": 3200000,
-      "monthlyBudget": null
+      "spendingType": "계획형"
     },
     {
       "id": "2",
@@ -193,9 +227,7 @@
       "username": "박플렉스",
       "password": "demo2222",
       "totalAmount": 1800000,
-      "spendingType": "플렉스형",
-      "expectedIncome": null,
-      "monthlyBudget": 1800000
+      "spendingType": "플렉스형"
     },
     {
       "id": "3",
@@ -203,7 +235,7 @@
       "username": "최사교",
       "password": "demo3333",
       "totalAmount": 2100000,
-      "spendingType": "사회형",
+      "spendingType": "계획형",
       "expectedIncome": null,
       "monthlyBudget": null
     },
@@ -213,9 +245,7 @@
       "username": "정가랑비",
       "password": "demo4444",
       "totalAmount": 950000,
-      "spendingType": "보슬비형",
-      "expectedIncome": null,
-      "monthlyBudget": null
+      "spendingType": "보슬비형"
     }
   ]
 }

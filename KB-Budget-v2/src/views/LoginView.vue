@@ -4,20 +4,24 @@ import { useRouter } from 'vue-router';
 import { useUserStore } from '../stores/user';
 import { useTransactionStore } from '../stores/transaction';
 import { User, Lock, AlertTriangle } from 'lucide-vue-next';
-
+import { useCategoryStore } from '../stores/category';
 const router = useRouter();
 const userStore = useUserStore();
 const transactionStore = useTransactionStore();
 const loginId = ref('');
 const password = ref('');
 const isLoading = ref(false);
-
+const categoryStore = useCategoryStore();
 async function handleLogin() {
   if (!loginId.value || !password.value) return;
   isLoading.value = true;
   const success = await userStore.login(loginId.value, password.value);
   if (success) {
-    await transactionStore.loadTransactionsFromServer(userStore.currentUser.id);
+    await Promise.all([
+      transactionStore.loadTransactionsFromServer(userStore.currentUser.id),
+      categoryStore.loadCategoriesFromServer(), // 추가
+    ]);
+
     isLoading.value = false;
     router.push('/');
   } else {
@@ -77,7 +81,11 @@ async function handleLogin() {
           </div>
 
           <p v-if="userStore.loginError" class="error-msg">
-            <AlertTriangle class="error-msg__icon" :size="16" :stroke-width="2" />
+            <AlertTriangle
+              class="error-msg__icon"
+              :size="16"
+              :stroke-width="2"
+            />
             {{ userStore.loginError }}
           </p>
 
