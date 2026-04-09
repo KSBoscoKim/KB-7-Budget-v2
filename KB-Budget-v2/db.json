@@ -127,32 +127,36 @@
       "loginId": "plan_lee",
       "username": "이계획",
       "password": "demo1111",
-      "totalAmount": 3200000,
-      "spendingType": "계획형"
+      "spendingType": "계획형",
+      "expectedIncome": 3200000,
+      "monthlyBudget": null
     },
     {
       "id": "2",
       "loginId": "flex_park",
       "username": "박플렉스",
       "password": "demo2222",
-      "totalAmount": 1800000,
-      "spendingType": "플렉스형"
+      "spendingType": "플렉스형",
+      "expectedIncome": null,
+      "monthlyBudget": 1800000
     },
     {
       "id": "3",
       "loginId": "social_choi",
       "username": "최사교",
       "password": "demo3333",
-      "totalAmount": 2100000,
-      "spendingType": "사회형"
+      "spendingType": "사회형",
+      "expectedIncome": null,
+      "monthlyBudget": null
     },
     {
       "id": "4",
       "loginId": "drip_jung",
       "username": "정가랑비",
       "password": "demo4444",
-      "totalAmount": 950000,
-      "spendingType": "보슬비형"
+      "spendingType": "보슬비형",
+      "expectedIncome": null,
+      "monthlyBudget": null
     }
   ]
 }

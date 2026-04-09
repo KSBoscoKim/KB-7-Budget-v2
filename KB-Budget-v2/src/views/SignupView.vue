@@ -35,7 +35,6 @@ async function handleSignup() {
     loginId: loginId.value,
     password: password.value,
     username: username.value,
-    totalAmount: 0,
     spendingType: '일반형',
   });
   isLoading.value = false;

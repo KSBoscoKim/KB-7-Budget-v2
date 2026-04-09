@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useTransactionStore } from '@/stores/transaction'
 import { useBudgetStore } from '@/stores/budget'
 import { useUserStore } from '@/stores/user'
+import { SquarePen, Info } from 'lucide-vue-next'
 
 const txStore = useTransactionStore()
 const budgetStore = useBudgetStore()
@@ -110,10 +111,7 @@ watch(currentUser, () => budgetStore.init())
         <p class="bp-month">{{ monthLabel }} 예산</p>
       </div>
       <button class="bp-edit-btn" @click="openEdit" aria-label="예산 수정">
-        <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15">
-          <path d="m5.433 13.917 1.144-3.054a.5.5 0 0 1 .114-.175l6.76-6.76a1.5 1.5 0 0 1 2.121 2.121l-6.76 6.76a.5.5 0 0 1-.175.114l-3.054 1.144a.25.25 0 0 1-.323-.323Z"/>
-          <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z"/>
-        </svg>
+        <SquarePen :size="15" :stroke-width="2" />
       </button>
     </div>
 
@@ -166,10 +164,7 @@ watch(currentUser, () => budgetStore.init())
           </span>
         </div>
         <div v-if="dailyBudget > 0" class="bp-daily-hint">
-          <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12">
-            <path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Z"/>
-            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588ZM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-          </svg>
+          <Info :size="12" :stroke-width="2.2" />
           오늘부터 {{ daysLeft }}일, 하루 <strong>{{ fmt(dailyBudget) }}원</strong> 가능
         </div>
       </div>

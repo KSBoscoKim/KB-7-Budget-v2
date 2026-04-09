@@ -16,14 +16,14 @@ export const useBudgetStore = defineStore('budget', () => {
     return `budget_${userId}_${monthKey}`
   }
 
-  /** 저장된 예산을 불러옴. 없으면 유저의 totalAmount 반환 */
+  /** 저장된 예산을 불러옴. 없으면 유저의 monthlyBudget 반환 */
   function loadBudget() {
     const user = userStore.currentUser
     if (!user) return 0
     const key = storageKey(user.id, currentMonthKey())
     const saved = localStorage.getItem(key)
     if (saved !== null) return Number(saved)
-    return Number(user.totalAmount) || 0
+    return Number(user.monthlyBudget) || 0
   }
 
   const monthlyBudget = ref(0)

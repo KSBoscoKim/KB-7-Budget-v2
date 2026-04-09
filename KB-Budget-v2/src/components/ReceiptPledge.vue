@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useTransactionStore } from '@/stores/transaction'
 import { useBudgetStore } from '@/stores/budget'
 import { useUserStore } from '@/stores/user'
+import { SquarePen, Trash2, Plus } from 'lucide-vue-next'
 
 const txStore = useTransactionStore()
 const budgetStore = useBudgetStore()
@@ -32,7 +33,7 @@ function loadPlan() {
     plan.value = JSON.parse(saved)
   } else {
     plan.value = {
-      expectedIncome: Number(currentUser.value?.totalAmount) || 0,
+      expectedIncome: Number(currentUser.value?.expectedIncome) || 0,
       fixedItems: [
         { id: '1', name: '주거비', amount: 0 },
         { id: '2', name: '교통비', amount: 0 },
@@ -140,10 +141,7 @@ watch(PLAN_KEY, () => loadPlan())
         <p class="rp-title">{{ monthLabel }} 예산 계획</p>
       </div>
       <button class="rp-edit-icon" @click="startEdit" aria-label="예산 계획 수정">
-        <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15">
-          <path d="m5.433 13.917 1.144-3.054a.5.5 0 0 1 .114-.175l6.76-6.76a1.5 1.5 0 0 1 2.121 2.121l-6.76 6.76a.5.5 0 0 1-.175.114l-3.054 1.144a.25.25 0 0 1-.323-.323Z"/>
-          <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z"/>
-        </svg>
+        <SquarePen :size="15" :stroke-width="2" />
       </button>
     </div>
 
@@ -250,17 +248,12 @@ watch(PLAN_KEY, () => loadPlan())
                     <span class="rp-input__unit">원</span>
                   </div>
                   <button class="rp-remove-btn" @click="removeItem(item.id)" aria-label="삭제">
-                    <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14">
-                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                      <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                    </svg>
+                    <Trash2 :size="14" :stroke-width="2" />
                   </button>
                 </div>
 
                 <button class="rp-add-btn" @click="addItem">
-                  <svg viewBox="0 0 16 16" fill="currentColor" width="13" height="13">
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4Z"/>
-                  </svg>
+                  <Plus :size="13" :stroke-width="2.5" />
                   항목 추가
                 </button>
               </div>

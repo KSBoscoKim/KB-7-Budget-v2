@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/user'
+import { User, Lock, AlertTriangle } from 'lucide-vue-next'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -44,10 +45,7 @@ async function handleLogin() {
           <div class="field">
             <label class="field__label" for="loginId">아이디</label>
             <div class="field__input-wrap">
-              <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
+              <User class="field__icon" :size="18" :stroke-width="1.7" />
               <input
                 id="loginId"
                 v-model="loginId"
@@ -62,10 +60,7 @@ async function handleLogin() {
           <div class="field">
             <label class="field__label" for="password">비밀번호</label>
             <div class="field__input-wrap">
-              <svg class="field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
+              <Lock class="field__icon" :size="18" :stroke-width="1.7" />
               <input
                 id="password"
                 v-model="password"
@@ -78,9 +73,7 @@ async function handleLogin() {
           </div>
 
           <p v-if="userStore.loginError" class="error-msg">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="error-msg__icon">
-              <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 1.999-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"/>
-            </svg>
+            <AlertTriangle class="error-msg__icon" :size="16" :stroke-width="2" />
             {{ userStore.loginError }}
           </p>
 

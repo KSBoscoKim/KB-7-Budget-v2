@@ -49,7 +49,11 @@ export const useUserStore = defineStore('user', () => {
         loginError.value = '이미 사용 중인 아이디입니다.'
         return false
       }
-      const newUser = await createUser(payload)
+      const newUser = await createUser({
+        expectedIncome: null,
+        monthlyBudget: null,
+        ...payload,
+      })
       currentUser.value = newUser
       return true
     } catch (e) {

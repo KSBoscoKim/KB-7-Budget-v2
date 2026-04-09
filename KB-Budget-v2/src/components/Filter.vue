@@ -1,6 +1,7 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { useTransactionStore } from '@/stores/transaction'
+import { Calendar, Tag } from 'lucide-vue-next'
 
 const emit = defineEmits(['open-date', 'open-category'])
 
@@ -16,10 +17,7 @@ const { hasDateFilter, hasCategoryFilter } = storeToRefs(transactionStore)
       :class="{ 'filter-chip--active': hasDateFilter }"
       @click="emit('open-date')"
     >
-      <!-- 달력 아이콘 -->
-      <svg class="filter-chip__icon" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M5.75 2a.75.75 0 0 1 .75.75V4h7V2.75a.75.75 0 0 1 1.5 0V4h.25A2.75 2.75 0 0 1 18 6.75v8.5A2.75 2.75 0 0 1 15.25 18H4.75A2.75 2.75 0 0 1 2 15.25v-8.5A2.75 2.75 0 0 1 4.75 4H5V2.75A.75.75 0 0 1 5.75 2Zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75Z" clip-rule="evenodd"/>
-      </svg>
+      <Calendar class="filter-chip__icon" :size="15" :stroke-width="2.2" />
       <span class="filter-chip__text">날짜</span>
       <span v-if="hasDateFilter" class="filter-chip__badge" aria-hidden="true" />
     </button>
@@ -30,10 +28,7 @@ const { hasDateFilter, hasCategoryFilter } = storeToRefs(transactionStore)
       :class="{ 'filter-chip--active': hasCategoryFilter }"
       @click="emit('open-category')"
     >
-      <!-- 태그 아이콘 -->
-      <svg class="filter-chip__icon" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M4.5 2A2.5 2.5 0 0 0 2 4.5v3.879a2.5 2.5 0 0 0 .732 1.767l7.5 7.5a2.5 2.5 0 0 0 3.536 0l3.878-3.878a2.5 2.5 0 0 0 0-3.536l-7.5-7.5A2.5 2.5 0 0 0 8.38 2H4.5ZM5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd"/>
-      </svg>
+      <Tag class="filter-chip__icon" :size="15" :stroke-width="2.2" />
       <span class="filter-chip__text">카테고리</span>
       <span v-if="hasCategoryFilter" class="filter-chip__badge" aria-hidden="true" />
     </button>
