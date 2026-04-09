@@ -139,8 +139,10 @@ import charFlex from '@/assets/images/character-flex.png';
 import charSocial from '@/assets/images/character-social.png';
 import charPlan from '@/assets/images/character-plan.png';
 import charDrizzle from '@/assets/images/character-drizzle.png';
+import { useUserStore } from '@/stores/user';
 
 const router = useRouter();
+const userStore = useUserStore();
 
 const step = ref('start');
 const currentIdx = ref(0);
@@ -178,7 +180,7 @@ const questions = [
   },
   {
     id: 9,
-    text: '혼자 영화를 보거나 취미 생활을 즐기는 데 돈을 쓰는 것이 가장 아깝지 않다.',
+    text: '혼자 취미 생활을 즐기는 데 돈을 쓰는 것이 아깝지 않다.',
   },
   {
     id: 10,
@@ -233,7 +235,8 @@ function startTest() {
 function skipTest() {
   router.push('/');
 }
-function goHome() {
+async function goHome() {
+  await userStore.updateProfile({ spendingType: resultType.value });
   router.push('/');
 }
 function selectAnswer(val) {
