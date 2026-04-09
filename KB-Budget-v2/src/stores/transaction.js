@@ -1,10 +1,9 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import seed from '../../db.json';
 import * as txApi from '../api/transactions'
 
 export const useTransactionStore = defineStore('transaction', () => {
-  const transactions = ref(seed.transactions.map((t) => ({ ...t })));
+  const transactions = ref([]);
     const loadError = ref(null)
 
   /** YYYY-MM-DD, null이면 해당 끝 미적용 */
