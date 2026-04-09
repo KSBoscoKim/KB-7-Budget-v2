@@ -1,15 +1,6 @@
 {
   "transactions": [
     {
-      "id": "1",
-      "userId": "1",
-      "type": "income",
-      "date": "2026-04-01",
-      "amount": 150000,
-      "category": "금융소득",
-      "memo": "미국 주식 배당금 입금"
-    },
-    {
       "id": "2",
       "userId": "2",
       "type": "expense",
@@ -192,8 +183,8 @@
       "username": "이계획",
       "password": "demo1111",
       "totalAmount": 3200000,
-      "spendingType": "사회형",
-      "expectedIncome": null,
+      "spendingType": "보슬비형",
+      "expectedIncome": 3200000,
       "monthlyBudget": null
     },
     {
@@ -202,7 +193,9 @@
       "username": "박플렉스",
       "password": "demo2222",
       "totalAmount": 1800000,
-      "spendingType": "플렉스형"
+      "spendingType": "플렉스형",
+      "expectedIncome": null,
+      "monthlyBudget": 1800000
     },
     {
       "id": "3",
@@ -210,7 +203,9 @@
       "username": "최사교",
       "password": "demo3333",
       "totalAmount": 2100000,
-      "spendingType": "사회형"
+      "spendingType": "사회형",
+      "expectedIncome": null,
+      "monthlyBudget": null
     },
     {
       "id": "4",
@@ -218,7 +213,9 @@
       "username": "정가랑비",
       "password": "demo4444",
       "totalAmount": 950000,
-      "spendingType": "보슬비형"
+      "spendingType": "보슬비형",
+      "expectedIncome": null,
+      "monthlyBudget": null
     }
   ]
 }

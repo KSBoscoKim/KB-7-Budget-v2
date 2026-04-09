@@ -50,6 +50,7 @@ export const useUserStore = defineStore('user', () => {
         return false;
       }
       const newUser = await createUser({
+        totalAmount: 0,
         expectedIncome: null,
         monthlyBudget: null,
         ...payload,
