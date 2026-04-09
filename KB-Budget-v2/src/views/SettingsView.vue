@@ -1,86 +1,86 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
-import { LogOut, Check, Save } from 'lucide-vue-next'
+import { ref, computed, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+import { LogOut, Check, Save } from 'lucide-vue-next';
 
-const router = useRouter()
-const userStore = useUserStore()
-const { currentUser } = storeToRefs(userStore)
+const router = useRouter();
+const userStore = useUserStore();
+const { currentUser } = storeToRefs(userStore);
 
 const SPENDING_TYPES = [
-  { key: '계획형',   emoji: '📋', desc: '수입·지출 계획을 세워 관리' },
+  { key: '계획형', emoji: '📋', desc: '수입·지출 계획을 세워 관리' },
   { key: '플렉스형', emoji: '💪', desc: '월 예산 한도를 정해 관리' },
-  { key: '사회형',   emoji: '🤝', desc: '나와 타인을 위한 지출 구분' },
+  { key: '사회형', emoji: '🤝', desc: '나와 타인을 위한 지출 구분' },
   { key: '보슬비형', emoji: '🌧️', desc: '소소한 지출 빈도를 체크' },
-]
+];
 
-const selectedType = ref(currentUser.value?.spendingType ?? '계획형')
-const editIncome = ref('')
-const editBudget = ref('')
-const isSaving = ref(false)
-const saveSuccess = ref(false)
+const selectedType = ref(currentUser.value?.spendingType ?? '계획형');
+const editIncome = ref('');
+const editBudget = ref('');
+const isSaving = ref(false);
+const saveSuccess = ref(false);
 
 function initFields() {
-  if (!currentUser.value) return
-  selectedType.value = currentUser.value.spendingType
+  if (!currentUser.value) return;
+  selectedType.value = currentUser.value.spendingType;
   editIncome.value = currentUser.value.expectedIncome
     ? String(currentUser.value.expectedIncome)
-    : ''
+    : '';
   editBudget.value = currentUser.value.monthlyBudget
     ? String(currentUser.value.monthlyBudget)
-    : ''
+    : '';
 }
-initFields()
-watch(currentUser, initFields)
+initFields();
+watch(currentUser, initFields);
 
-const showIncomeField = computed(() => selectedType.value === '계획형')
-const showBudgetField = computed(() => selectedType.value === '플렉스형')
+const showIncomeField = computed(() => selectedType.value === '계획형');
+const showBudgetField = computed(() => selectedType.value === '플렉스형');
 
 const hasChanges = computed(() => {
-  if (!currentUser.value) return false
-  if (selectedType.value !== currentUser.value.spendingType) return true
+  if (!currentUser.value) return false;
+  if (selectedType.value !== currentUser.value.spendingType) return true;
 
-  const curIncome = currentUser.value.expectedIncome ?? ''
-  const curBudget = currentUser.value.monthlyBudget ?? ''
-  if (String(curIncome) !== (editIncome.value || '')) return true
-  if (String(curBudget) !== (editBudget.value || '')) return true
+  const curIncome = currentUser.value.expectedIncome ?? '';
+  const curBudget = currentUser.value.monthlyBudget ?? '';
+  if (String(curIncome) !== (editIncome.value || '')) return true;
+  if (String(curBudget) !== (editBudget.value || '')) return true;
 
-  return false
-})
+  return false;
+});
 
 async function handleSave() {
-  if (!hasChanges.value || isSaving.value) return
-  isSaving.value = true
+  if (!hasChanges.value || isSaving.value) return;
+  isSaving.value = true;
 
-  const fields = { spendingType: selectedType.value }
+  const fields = { spendingType: selectedType.value };
   fields.expectedIncome = editIncome.value
     ? Number(editIncome.value.replace(/,/g, ''))
-    : null
+    : null;
   fields.monthlyBudget = editBudget.value
     ? Number(editBudget.value.replace(/,/g, ''))
-    : null
+    : null;
 
-  const ok = await userStore.updateProfile(fields)
-  isSaving.value = false
+  const ok = await userStore.updateProfile(fields);
+  isSaving.value = false;
 
   if (ok) {
-    saveSuccess.value = true
-    setTimeout(() => (saveSuccess.value = false), 2000)
+    saveSuccess.value = true;
+    setTimeout(() => (saveSuccess.value = false), 2000);
   }
 }
 
 function handleLogout() {
-  userStore.logout()
-  router.push('/login')
+  userStore.logout();
+  router.push('/login');
 }
 
 function formatAmount(val) {
-  if (!val) return ''
-  const num = Number(String(val).replace(/,/g, ''))
-  if (isNaN(num) || num === 0) return ''
-  return new Intl.NumberFormat('ko-KR').format(num) + '원'
+  if (!val) return '';
+  const num = Number(String(val).replace(/,/g, ''));
+  if (isNaN(num) || num === 0) return '';
+  return new Intl.NumberFormat('ko-KR').format(num) + '원';
 }
 </script>
 
@@ -100,6 +100,14 @@ function formatAmount(val) {
           <div class="info__row">
             <dt>아이디</dt>
             <dd>{{ currentUser.loginId }}</dd>
+          </div>
+          <div class="info__row">
+            <dt>소비 유형</dt>
+            <dd>
+              <template v-if="currentUser.spendingType">
+                {{ currentUser.spendingType }}
+              </template>
+            </dd>
           </div>
         </dl>
       </template>
@@ -131,14 +139,20 @@ function formatAmount(val) {
 
     <!-- 금액 설정 -->
     <Transition name="fade" mode="out-in">
-      <div v-if="showIncomeField || showBudgetField" class="card" :key="selectedType">
+      <div
+        v-if="showIncomeField || showBudgetField"
+        class="card"
+        :key="selectedType"
+      >
         <p class="card__label">
           {{ showIncomeField ? '예상 수입 설정' : '월 예산 설정' }}
         </p>
         <p class="card__desc">
-          {{ showIncomeField
-            ? '이번 달 예상되는 총 수입을 입력하세요'
-            : '이번 달 지출 목표 금액을 입력하세요' }}
+          {{
+            showIncomeField
+              ? '이번 달 예상되는 총 수입을 입력하세요'
+              : '이번 달 지출 목표 금액을 입력하세요'
+          }}
         </p>
 
         <div class="amount-field">
@@ -160,10 +174,16 @@ function formatAmount(val) {
           />
           <span class="amount-unit">원</span>
         </div>
-        <p v-if="showIncomeField && currentUser?.expectedIncome" class="current-val">
+        <p
+          v-if="showIncomeField && currentUser?.expectedIncome"
+          class="current-val"
+        >
           현재 설정: {{ formatAmount(currentUser.expectedIncome) }}
         </p>
-        <p v-if="showBudgetField && currentUser?.monthlyBudget" class="current-val">
+        <p
+          v-if="showBudgetField && currentUser?.monthlyBudget"
+          class="current-val"
+        >
           현재 설정: {{ formatAmount(currentUser.monthlyBudget) }}
         </p>
       </div>
@@ -242,7 +262,9 @@ function formatAmount(val) {
 }
 
 /* ── 내 정보 ── */
-.info { margin: 0; }
+.info {
+  margin: 0;
+}
 .info__row {
   display: grid;
   grid-template-columns: 5.5rem 1fr;
@@ -251,7 +273,9 @@ function formatAmount(val) {
   border-bottom: 1px solid var(--color-border-light);
   font-size: 0.875rem;
 }
-.info__row:last-of-type { border-bottom: 0; }
+.info__row:last-of-type {
+  border-bottom: 0;
+}
 .info__row dt {
   margin: 0;
   color: var(--color-text-secondary);
@@ -360,7 +384,9 @@ function formatAmount(val) {
 }
 
 .amount-input::-webkit-inner-spin-button,
-.amount-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.amount-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 
 .amount-unit {
   position: absolute;
@@ -423,7 +449,9 @@ function formatAmount(val) {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ── 로그아웃 ── */

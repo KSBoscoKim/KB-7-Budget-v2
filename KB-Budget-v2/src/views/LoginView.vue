@@ -2,12 +2,11 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../stores/user';
-import { useTransactionStore } from '../stores/transaction';
 import { User, Lock, AlertTriangle } from 'lucide-vue-next';
 
 const router = useRouter();
 const userStore = useUserStore();
-const transactionStore = useTransactionStore();
+
 const loginId = ref('');
 const password = ref('');
 const isLoading = ref(false);
@@ -16,12 +15,13 @@ async function handleLogin() {
   if (!loginId.value || !password.value) return;
   isLoading.value = true;
   const success = await userStore.login(loginId.value, password.value);
+  isLoading.value = false;
   if (success) {
-    await transactionStore.loadTransactionsFromServer(userStore.currentUser.id);
-    isLoading.value = false;
-    router.push('/');
-  } else {
-    isLoading.value = false;
+    if (!userStore.currentUser?.spendingType) {
+      router.push('/testing');
+    } else {
+      router.push('/');
+    }
   }
 }
 </script>
@@ -77,7 +77,11 @@ async function handleLogin() {
           </div>
 
           <p v-if="userStore.loginError" class="error-msg">
-            <AlertTriangle class="error-msg__icon" :size="16" :stroke-width="2" />
+            <AlertTriangle
+              class="error-msg__icon"
+              :size="14"
+              :stroke-width="2"
+            />
             {{ userStore.loginError }}
           </p>
 
@@ -196,8 +200,7 @@ async function handleLogin() {
   letter-spacing: 0.08em;
   line-height: 1;
   color: var(--color-brand-text);
-  text-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.6),
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6),
     0 4px 20px rgba(245, 158, 11, 0.3);
 }
 
@@ -213,10 +216,8 @@ async function handleLogin() {
   background: rgba(255, 255, 255, 0.9);
   border-radius: var(--radius-card);
   padding: 1.75rem 1.5rem;
-  box-shadow:
-    0 2px 8px rgba(26, 20, 16, 0.06),
-    0 16px 48px rgba(26, 20, 16, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(26, 20, 16, 0.06),
+    0 16px 48px rgba(26, 20, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -271,9 +272,7 @@ async function handleLogin() {
   color: var(--color-text);
   background: var(--color-bg-subtle);
   outline: none;
-  transition:
-    border-color var(--dur-fast),
-    box-shadow var(--dur-fast),
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast),
     background var(--dur-fast);
   box-sizing: border-box;
 }
@@ -284,7 +283,6 @@ async function handleLogin() {
   background: var(--color-bg);
 }
 
-.field__input:focus + .field__icon,
 .field__input-wrap:focus-within .field__icon {
   color: var(--color-brand-mid);
 }
@@ -322,10 +320,8 @@ async function handleLogin() {
   border-radius: var(--radius-pill);
   cursor: pointer;
   box-shadow: var(--shadow-fab);
-  transition:
-    transform var(--dur-fast) var(--ease-spring),
-    filter var(--dur-fast),
-    box-shadow var(--dur-fast);
+  transition: transform var(--dur-fast) var(--ease-spring),
+    filter var(--dur-fast), box-shadow var(--dur-fast);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -342,10 +338,8 @@ async function handleLogin() {
 .login-btn:hover:not(:disabled) {
   filter: brightness(1.05);
   transform: translateY(-2px);
-  box-shadow:
-    0 16px 40px rgba(245, 158, 11, 0.5),
-    0 4px 12px rgba(120, 53, 15, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  box-shadow: 0 16px 40px rgba(245, 158, 11, 0.5),
+    0 4px 12px rgba(120, 53, 15, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .login-btn:active:not(:disabled) {
@@ -358,7 +352,6 @@ async function handleLogin() {
   cursor: not-allowed;
 }
 
-/* 로딩 스피너 */
 .login-btn__spinner {
   display: block;
   width: 22px;
@@ -383,8 +376,8 @@ async function handleLogin() {
 }
 
 .signup-link a {
-  color: var(--color-primary, #3b82f6);
-  font-weight: 600;
+  color: var(--color-brand-mid, #f59e0b);
+  font-weight: 700;
   text-decoration: none;
 }
 
