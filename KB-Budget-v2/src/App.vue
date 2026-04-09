@@ -1,12 +1,12 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useTransactionStore } from './stores/transaction'
+// import { onMounted } from 'vue';
+// import { useTransactionStore } from './stores/transaction';
 
-const transactionStore = useTransactionStore()
+// const transactionStore = useTransactionStore();
 
-onMounted(() => {
-  transactionStore.loadTransactionsFromServer()
-})
+// onMounted(() => {
+//   transactionStore.loadTransactionsFromServer();
+// });
 </script>
 
 <template>
@@ -42,13 +42,19 @@ body {
 }
 
 /* 전역 box-sizing 리셋 */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 /* 스크롤바 세련되게 */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 ::-webkit-scrollbar-thumb {
   background: rgba(245, 158, 11, 0.28);
   border-radius: 999px;

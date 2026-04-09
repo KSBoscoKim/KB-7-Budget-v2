@@ -1,119 +1,124 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useCategoryStore } from '../stores/category'
-import { useTransactionStore } from '../stores/transaction'
+import { computed, onMounted, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useCategoryStore } from '../stores/category';
+import { useTransactionStore } from '../stores/transaction';
+import { useUserStore } from '@/stores/user';
 
-const router = useRouter()
-const route = useRoute()
-const categoryStore = useCategoryStore()
-const transactionStore = useTransactionStore()
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
+const categoryStore = useCategoryStore();
+const transactionStore = useTransactionStore();
 
-const type = ref('expense')
-const selectedCategory = ref('')
-const amount = ref('')
-const memo = ref('')
-const date = ref('')
+const type = ref('expense');
+const selectedCategory = ref('');
+const amount = ref('');
+const memo = ref('');
+const date = ref('');
 
 const editingId = computed(() => {
-  const id = route.query.id
-  return id != null && id !== '' ? String(id) : null
-})
+  const id = route.query.id;
+  return id != null && id !== '' ? String(id) : null;
+});
 
 const filteredCategories = computed(() =>
   categoryStore.categories.filter((category) => category.type === type.value),
-)
+);
 
 function todayStr() {
-  return new Date().toISOString().slice(0, 10)
+  return new Date().toISOString().slice(0, 10);
 }
 
 function resetForm() {
-  type.value = 'expense'
-  selectedCategory.value = ''
-  amount.value = ''
-  memo.value = ''
-  date.value = todayStr()
+  type.value = 'expense';
+  selectedCategory.value = '';
+  amount.value = '';
+  memo.value = '';
+  date.value = todayStr();
 }
 
 function applyTransaction(tx) {
-  type.value = tx.type
-  selectedCategory.value = tx.category
-  amount.value = String(tx.amount)
-  memo.value = tx.memo ?? ''
-  date.value = tx.date
+  type.value = tx.type;
+  selectedCategory.value = tx.category;
+  amount.value = String(tx.amount);
+  memo.value = tx.memo ?? '';
+  date.value = tx.date;
 }
 
 function syncFormFromRoute() {
-  const id = editingId.value
+  const id = editingId.value;
   if (!id) {
-    resetForm()
-    return
+    resetForm();
+    return;
   }
-  const tx = transactionStore.transactions.find((t) => String(t.id) === id)
-  if (tx) applyTransaction(tx)
+  const tx = transactionStore.transactions.find((t) => String(t.id) === id);
+  if (tx) applyTransaction(tx);
 }
 
 watch(type, () => {
-  selectedCategory.value = ''
-})
+  selectedCategory.value = '';
+});
 
 watch(
   () => route.query.id,
   () => {
-    syncFormFromRoute()
+    syncFormFromRoute();
   },
-)
+);
 
 onMounted(() => {
-  syncFormFromRoute()
-})
+  syncFormFromRoute();
+});
 
 function goHome() {
-  router.push({ name: 'home' })
+  router.push({ name: 'home' });
 }
 
 async function save() {
-  const n = Number(amount.value)
+  const n = Number(amount.value);
   if (!date.value || !selectedCategory.value || Number.isNaN(n) || n <= 0) {
-    window.alert('금액, 카테고리, 날짜를 확인해 주세요.')
-    return
+    window.alert('금액, 카테고리, 날짜를 확인해 주세요.');
+    return;
   }
   const payload = {
+    userId: userStore.currentUser.id,
     type: type.value,
     date: date.value,
     amount: n,
     category: selectedCategory.value,
     memo: (memo.value || '').trim(),
-  }
+  };
   try {
     if (editingId.value) {
       await transactionStore.updateTransaction(editingId.value, {
         ...payload,
         id: editingId.value,
-      })
+      });
     } else {
-      await transactionStore.createTransaction(payload)
+      await transactionStore.createTransaction(payload);
     }
-    goHome()
+    goHome();
   } catch (e) {
-    console.error(e)
-    window.alert('저장에 실패했습니다. 터미널에서 npm run server 로 json-server가 켜져 있는지 확인해 주세요.')
+    console.error(e);
+    window.alert(
+      '저장에 실패했습니다. 터미널에서 npm run server 로 json-server가 켜져 있는지 확인해 주세요.',
+    );
   }
 }
 
 async function deleteTx() {
   if (!editingId.value) {
-    goHome()
-    return
+    goHome();
+    return;
   }
-  if (!window.confirm('이 거래를 삭제할까요?')) return
+  if (!window.confirm('이 거래를 삭제할까요?')) return;
   try {
-    await transactionStore.removeTransaction(editingId.value)
-    goHome()
+    await transactionStore.removeTransaction(editingId.value);
+    goHome();
   } catch (e) {
-    console.error(e)
-    window.alert('삭제에 실패했습니다. json-server 실행 여부를 확인해 주세요.')
+    console.error(e);
+    window.alert('삭제에 실패했습니다. json-server 실행 여부를 확인해 주세요.');
   }
 }
 </script>
@@ -164,7 +169,13 @@ async function deleteTx() {
 
       <div class="field-row">
         <label class="field-label" for="memo">메모</label>
-        <textarea id="memo" v-model="memo" rows="3" placeholder="메모 입력" class="field-input memo-input" />
+        <textarea
+          id="memo"
+          v-model="memo"
+          rows="3"
+          placeholder="메모 입력"
+          class="field-input memo-input"
+        />
       </div>
 
       <div class="field-row">
@@ -174,7 +185,9 @@ async function deleteTx() {
     </form>
 
     <div class="action-row">
-      <button type="button" class="action-btn save-btn" @click="save">저장</button>
+      <button type="button" class="action-btn save-btn" @click="save">
+        저장
+      </button>
       <button type="button" class="action-btn delete-btn" @click="deleteTx">
         {{ editingId ? '삭제' : '취소' }}
       </button>

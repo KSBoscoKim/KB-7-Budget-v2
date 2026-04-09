@@ -1,10 +1,11 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import * as txApi from '../api/transactions'
+import * as txApi from '../api/transactions';
 
 export const useTransactionStore = defineStore('transaction', () => {
+  //const transactions = ref(seed.transactions.map((t) => ({ ...t })));
   const transactions = ref([]);
-    const loadError = ref(null)
+  const loadError = ref(null);
 
   /** YYYY-MM-DD, null이면 해당 끝 미적용 */
   const filterDateFrom = ref(null);
@@ -23,7 +24,7 @@ export const useTransactionStore = defineStore('transaction', () => {
         return false;
       }
       return true;
-    })
+    }),
   );
 
   const sortedByDateDesc = computed(() =>
@@ -33,7 +34,7 @@ export const useTransactionStore = defineStore('transaction', () => {
       return String(b.id).localeCompare(String(a.id), undefined, {
         numeric: true,
       });
-    })
+    }),
   );
 
   /** 날짜 내림차순 섹션: 같은 날짜 거래는 함께 묶음 */
@@ -51,11 +52,11 @@ export const useTransactionStore = defineStore('transaction', () => {
   });
 
   const hasDateFilter = computed(
-    () => filterDateFrom.value != null || filterDateTo.value != null
+    () => filterDateFrom.value != null || filterDateTo.value != null,
   );
 
   const hasCategoryFilter = computed(
-    () => filterCategoryNames.value.length > 0
+    () => filterCategoryNames.value.length > 0,
   );
 
   function applyTransactionFilters({ dateFrom, dateTo, categoryNames }) {
@@ -85,37 +86,43 @@ export const useTransactionStore = defineStore('transaction', () => {
     });
     return map;
   });
-  async function loadTransactionsFromServer() {
-    loadError.value = null
+
+  //유저별 거래내역 출력
+  async function loadTransactionsFromServer(userId) {
+    loadError.value = null;
     try {
-      const rows = await txApi.fetchTransactions()
-      setTransactions(rows)
+      const rows = await txApi.fetchTransactions(userId);
+      setTransactions(rows);
     } catch (e) {
-      loadError.value = e
-      console.error(e)
+      loadError.value = e;
+      console.error(e);
     }
   }
 
   async function createTransaction(payload) {
-    const created = await txApi.createTransaction(payload)
-    transactions.value = [...transactions.value, created]
-    return created
+    const created = await txApi.createTransaction(payload);
+    transactions.value = [...transactions.value, created];
+    return created;
   }
 
   async function updateTransaction(id, payload) {
-    const updated = await txApi.updateTransaction(id, { ...payload, id })
-    const idx = transactions.value.findIndex((t) => String(t.id) === String(id))
+    const updated = await txApi.updateTransaction(id, { ...payload, id });
+    const idx = transactions.value.findIndex(
+      (t) => String(t.id) === String(id),
+    );
     if (idx !== -1) {
-      const next = [...transactions.value]
-      next[idx] = updated
-      transactions.value = next
+      const next = [...transactions.value];
+      next[idx] = updated;
+      transactions.value = next;
     }
-    return updated
+    return updated;
   }
 
   async function removeTransaction(id) {
-    await txApi.deleteTransaction(id)
-    transactions.value = transactions.value.filter((t) => String(t.id) !== String(id))
+    await txApi.deleteTransaction(id);
+    transactions.value = transactions.value.filter(
+      (t) => String(t.id) !== String(id),
+    );
   }
 
   return {
@@ -132,10 +139,10 @@ export const useTransactionStore = defineStore('transaction', () => {
     applyTransactionFilters,
     clearTransactionFilters,
     setTransactions,
-  transactionsByDate,  
-  loadTransactionsFromServer,
+    transactionsByDate,
+    loadTransactionsFromServer,
     createTransaction,
     updateTransaction,
     removeTransaction,
-  }
-})
+  };
+});

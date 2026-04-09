@@ -79,7 +79,7 @@ function formatAmount(amount) {
   <div class="social-panel">
     <div class="panel-header">
       <span class="emoji">🌟</span>
-      <p class="greeting">반가워요! 오늘은 누구를 위해 <b>씀씀</b>하셨나요?</p>
+      <p class="greeting">반가워요! 이번 달 누구를 위해 <b>씀씀</b>하셨나요?</p>
     </div>
 
     <div class="tab-group">
