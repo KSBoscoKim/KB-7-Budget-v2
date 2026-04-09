@@ -37,46 +37,6 @@
       "memo": "Core JavaScript 책 구매"
     },
     {
-      "type": "income",
-      "date": "2026-04-01",
-      "amount": 1000,
-      "category": "용돈",
-      "memo": "",
-      "id": "w3FJxwC"
-    },
-    {
-      "type": "expense",
-      "date": "2026-04-08",
-      "amount": 15000,
-      "category": "문화생활",
-      "memo": "",
-      "id": "zNudMdj"
-    },
-    {
-      "type": "expense",
-      "date": "2026-04-09",
-      "amount": 33333,
-      "category": "경조사/회비",
-      "memo": "",
-      "id": "dpfyYoU"
-    },
-    {
-      "type": "expense",
-      "date": "2026-04-09",
-      "amount": 333,
-      "category": "경조사/회비",
-      "memo": "",
-      "id": "u89t_u-"
-    },
-    {
-      "type": "expense",
-      "date": "2026-04-09",
-      "amount": 34,
-      "category": "문화생활",
-      "memo": "ss",
-      "id": "3YOzHUu"
-    },
-    {
       "userId": "1",
       "type": "expense",
       "date": "2026-04-09",

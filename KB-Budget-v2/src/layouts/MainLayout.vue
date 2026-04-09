@@ -1,6 +1,6 @@
 <script setup>
 import AppTabBar from '../components/AppTabBar.vue'
-import HeaderMascot from '../components/HeaderMascot.vue'
+import HeaderCharacter from '../components/HeaderMascot/HeaderCharacter.vue'
 </script>
 
 <template>
@@ -21,8 +21,8 @@ import HeaderMascot from '../components/HeaderMascot.vue'
           </div>
         </div>
 
-        <!-- 토끼 마스코트 + 동전 애니메이션 -->
-        <HeaderMascot />
+        <!-- 유형별 캐릭터 마스코트 -->
+        <HeaderCharacter />
       </header>
 
       <main class="app-main">
