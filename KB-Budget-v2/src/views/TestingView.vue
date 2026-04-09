@@ -197,11 +197,11 @@ const questions = [
 ];
 
 const resultDescriptions = {
-  계획가형:
+  계획형:
     '계획적이고 꼼꼼한 소비를 즐기는 타입이에요. 가격 비교는 기본, 예산 내에서 최고의 만족을 추구합니다.',
   플렉스형:
     '순간의 감정과 욕구에 충실한 소비 스타일! 때로는 지갑이 얇아지지만, 삶의 즐거움을 아는 사람이에요.',
-  사회활동가형:
+  사회형:
     '관계와 사람에 기꺼이 투자하는 타입이에요. 타인을 위한 소비에서 진정한 행복을 느낍니다.',
   보슬비형:
     '작은 지출이 모여 큰 소비가 되는 스타일. 충동적이지만 소소한 기쁨을 사랑하는 사람이에요.',
@@ -210,17 +210,17 @@ const resultDescriptions = {
 const currentQuestion = computed(() => questions[currentIdx.value]);
 
 const resultType = computed(() => {
-  const scores = { 계획가형: 0, 플렉스형: 0, 사회활동가형: 0, 보슬비형: 0 };
+  const scores = { 계획형: 0, 플렉스형: 0, 사회형: 0, 보슬비형: 0 };
   const a = answers.value;
-  if (a[0]) scores['계획가형']++;
-  if (a[2]) scores['계획가형']++;
-  if (a[5]) scores['계획가형']++;
+  if (a[0]) scores['계획형']++;
+  if (a[2]) scores['계획형']++;
+  if (a[5]) scores['계획형']++;
   if (a[3]) scores['플렉스형']++;
   if (a[4]) scores['플렉스형']++;
   if (a[8]) scores['플렉스형']++;
-  if (a[6]) scores['사회활동가형']++;
-  if (a[9]) scores['사회활동가형']++;
-  if (a[10]) scores['사회활동가형']++;
+  if (a[6]) scores['사회형']++;
+  if (a[9]) scores['사회형']++;
+  if (a[10]) scores['사회형']++;
   if (a[1]) scores['보슬비형']++;
   if (a[7]) scores['보슬비형']++;
   if (a[11]) scores['보슬비형']++;
@@ -258,8 +258,8 @@ function reset() {
 
 const CHARACTERS = {
   플렉스형: charFlex,
-  사회활동가형: charSocial,
-  계획가형: charPlan,
+  사회형: charSocial,
+  계획형: charPlan,
   보슬비형: charDrizzle,
 };
 

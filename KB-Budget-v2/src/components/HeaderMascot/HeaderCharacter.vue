@@ -12,8 +12,8 @@ const { currentUser } = storeToRefs(useUserStore());
 const MASCOT_MAP = {
   보슬비형: RabbitMascot,
   플렉스형: BearMascot,
-  사회활동가형: CrocodileMascot, // '사회형' → '사회활동가형'
-  계획가형: AlpacaMascot, // '계획형' → '계획가형'
+  사회형: CrocodileMascot,
+  계획형: AlpacaMascot,
 };
 
 const mascotComponent = computed(
