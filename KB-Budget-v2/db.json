@@ -107,6 +107,24 @@
       "category": "문화생활",
       "memo": "12312",
       "id": "CWVwHHl"
+    },
+    {
+      "userId": "1",
+      "type": "expense",
+      "date": "2026-04-09",
+      "amount": 1000000,
+      "category": "문화생활",
+      "memo": "",
+      "id": "gpIcSGR"
+    },
+    {
+      "userId": "1",
+      "type": "expense",
+      "date": "2026-04-09",
+      "amount": 3000,
+      "category": "경조사/회비",
+      "memo": "",
+      "id": "PcZ7y6f"
     }
   ],
   "categories": [
@@ -188,7 +206,7 @@
       "username": "이계획",
       "password": "demo1111",
       "totalAmount": 3200000,
-      "spendingType": "계획형",
+      "spendingType": "사회형",
       "expectedIncome": 3200000,
       "monthlyBudget": null,
       "fixedItems": [
