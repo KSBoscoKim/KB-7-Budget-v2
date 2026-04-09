@@ -4,16 +4,20 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 import { LogOut, Check, Save, Plus, Trash2 } from 'lucide-vue-next';
+import imgPlan from '@/assets/images/안경알파카.png';
+import imgFlex from '@/assets/images/플렉스곰2.png';
+import imgSocial from '@/assets/images/악어.png';
+import imgDrizzle from '@/assets/images/토끼.png';
 
 const router = useRouter();
 const userStore = useUserStore();
 const { currentUser } = storeToRefs(userStore);
 
 const SPENDING_TYPES = [
-  { key: '계획형', emoji: '📋', desc: '수입·지출 계획을 세워 관리' },
-  { key: '플렉스형', emoji: '💪', desc: '월 예산 한도를 정해 관리' },
-  { key: '사회형', emoji: '🤝', desc: '나와 타인을 위한 지출 구분' },
-  { key: '보슬비형', emoji: '🌧️', desc: '소소한 지출 빈도를 체크' },
+  { key: '계획형', img: imgPlan, desc: '수입·지출 계획을 세워 관리' },
+  { key: '플렉스형', img: imgFlex, desc: '월 예산 한도를 정해 관리' },
+  { key: '사회형', img: imgSocial, desc: '나와 타인을 위한 지출 구분' },
+  { key: '보슬비형', img: imgDrizzle, desc: '소소한 지출 빈도를 체크' },
 ];
 
 const selectedType = ref(currentUser.value?.spendingType ?? '계획형');
@@ -169,7 +173,9 @@ function formatAmount(val) {
           <span class="type-btn__check" v-if="selectedType === t.key">
             <Check :size="12" :stroke-width="3" />
           </span>
-          <span class="type-btn__emoji">{{ t.emoji }}</span>
+          <span class="type-btn__emoji">
+            <img :src="t.img" :alt="t.key" class="type-btn__img" :class="{ 'type-btn__img--large': t.key === '보슬비형' }" />
+          </span>
           <span class="type-btn__name">{{ t.key }}</span>
           <span class="type-btn__desc">{{ t.desc }}</span>
         </button>
@@ -426,8 +432,22 @@ function formatAmount(val) {
 }
 
 .type-btn__emoji {
-  font-size: 1.5rem;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.type-btn__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.type-btn__img--large {
+  width: 175%;
+  height: 175%;
 }
 
 .type-btn__name {
