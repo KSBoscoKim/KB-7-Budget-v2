@@ -38,15 +38,17 @@ watch(currentUser, initFields);
 const showIncomeField = computed(() => selectedType.value === '계획형');
 const showBudgetField = computed(() => selectedType.value === '플렉스형');
 
+function parseNum(val) {
+  if (!val) return null;
+  const n = Number(String(val).replace(/,/g, ''));
+  return isNaN(n) || n === 0 ? null : n;
+}
+
 const hasChanges = computed(() => {
   if (!currentUser.value) return false;
   if (selectedType.value !== currentUser.value.spendingType) return true;
-
-  const curIncome = currentUser.value.expectedIncome ?? '';
-  const curBudget = currentUser.value.monthlyBudget ?? '';
-  if (String(curIncome) !== (editIncome.value || '')) return true;
-  if (String(curBudget) !== (editBudget.value || '')) return true;
-
+  if (parseNum(editIncome.value) !== (currentUser.value.expectedIncome ?? null)) return true;
+  if (parseNum(editBudget.value) !== (currentUser.value.monthlyBudget ?? null)) return true;
   return false;
 });
 
@@ -54,13 +56,11 @@ async function handleSave() {
   if (!hasChanges.value || isSaving.value) return;
   isSaving.value = true;
 
-  const fields = { spendingType: selectedType.value };
-  fields.expectedIncome = editIncome.value
-    ? Number(editIncome.value.replace(/,/g, ''))
-    : null;
-  fields.monthlyBudget = editBudget.value
-    ? Number(editBudget.value.replace(/,/g, ''))
-    : null;
+  const fields = {
+    spendingType: selectedType.value,
+    expectedIncome: parseNum(editIncome.value),
+    monthlyBudget: parseNum(editBudget.value),
+  };
 
   const ok = await userStore.updateProfile(fields);
   isSaving.value = false;

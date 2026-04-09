@@ -189,7 +189,9 @@
       "username": "박플렉스",
       "password": "demo2222",
       "totalAmount": 1800000,
-      "spendingType": "플렉스형"
+      "spendingType": "플렉스형",
+      "expectedIncome": null,
+      "monthlyBudget": null
     },
     {
       "id": "3",
@@ -210,6 +212,26 @@
       "spendingType": "보슬비형",
       "expectedIncome": null,
       "monthlyBudget": null
+    },
+    {
+      "totalAmount": 0,
+      "expectedIncome": 12312,
+      "monthlyBudget": 11231,
+      "loginId": "12",
+      "password": "12",
+      "username": "12",
+      "spendingType": "계획형",
+      "id": "jKQN6Cd"
+    },
+    {
+      "totalAmount": 0,
+      "expectedIncome": null,
+      "monthlyBudget": null,
+      "loginId": "123",
+      "password": "123",
+      "username": "1233",
+      "spendingType": "플렉스형",
+      "id": "p_kmuHJ"
     }
   ]
 }

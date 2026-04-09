@@ -2,21 +2,30 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '../stores/user';
-import { User, Lock, AlertTriangle } from 'lucide-vue-next';
+import { useTransactionStore } from '../stores/transaction';
 import { useCategoryStore } from '../stores/category';
+import { User, Lock, AlertTriangle } from 'lucide-vue-next';
+
 const router = useRouter();
 const userStore = useUserStore();
+const transactionStore = useTransactionStore();
+const categoryStore = useCategoryStore();
 
 const loginId = ref('');
 const password = ref('');
 const isLoading = ref(false);
-const categoryStore = useCategoryStore();
+
 async function handleLogin() {
   if (!loginId.value || !password.value) return;
   isLoading.value = true;
   const success = await userStore.login(loginId.value, password.value);
   isLoading.value = false;
   if (success) {
+    const userId = userStore.currentUser.id;
+    await Promise.all([
+      categoryStore.loadCategoriesFromServer(),
+      transactionStore.loadTransactionsFromServer(userId),
+    ]);
     if (!userStore.currentUser?.spendingType) {
       router.push('/testing');
     } else {
