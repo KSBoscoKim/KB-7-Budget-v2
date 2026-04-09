@@ -179,7 +179,9 @@
       "username": "이계획",
       "password": "demo1111",
       "totalAmount": 3200000,
-      "spendingType": "계획형"
+      "spendingType": "보슬비형",
+      "expectedIncome": 3200000,
+      "monthlyBudget": null
     },
     {
       "id": "2",
@@ -205,7 +207,9 @@
       "username": "정가랑비",
       "password": "demo4444",
       "totalAmount": 950000,
-      "spendingType": "보슬비형"
+      "spendingType": "보슬비형",
+      "expectedIncome": null,
+      "monthlyBudget": null
     }
   ]
 }
