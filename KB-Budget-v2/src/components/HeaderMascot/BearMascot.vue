@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import bearImg from '@/assets/images/곰.png'
+import bearImg from '@/assets/images/플렉스곰2.png'
 import bill3 from '@/assets/images/지폐3.png'
 import bill4 from '@/assets/images/지폐4.png'
 import bill5 from '@/assets/images/지폐5.png'
