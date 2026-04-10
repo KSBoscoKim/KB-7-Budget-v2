@@ -271,10 +271,11 @@ const resultCharacter = computed(() => CHARACTERS[resultType.value]);
 .test-page {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* ← center → flex-start */
   justify-content: center;
-  min-height: 100vh;
-  padding: 1.5rem 1.25rem;
+  height: 100vh;
+  height: 100dvh;
+  padding: 2.5rem 1.25rem 1rem; /* ← 위 패딩 추가로 너무 딱 붙지 않게 */
   box-sizing: border-box;
   overflow: hidden;
   background: var(--color-bg-page);
