@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const client = axios.create({
-  baseURL: '/api',
-});
+import client from './utils';
 
 // export function fetchTransactions() {
 //   return client.get('/transactions').then((res) => res.data)
