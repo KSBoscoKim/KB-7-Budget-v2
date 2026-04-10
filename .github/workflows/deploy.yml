@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  IMAGE_NAME: vue-app
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -19,10 +22,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker 이미지 빌드
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/vue-app .
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }} .
 
       - name: Docker 이미지 푸시
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/vue-app
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
 
       - name: EC2에 배포
         uses: appleboy/ssh-action@v1
@@ -31,7 +34,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/vue-app
+            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
             docker stop vue-app || true
             docker rm vue-app || true
-            docker run -d -p 80:80 --name vue-app ${{ secrets.DOCKER_USERNAME }}/vue-app
+            docker run -d -p 80:80 --restart always --name vue-app ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
