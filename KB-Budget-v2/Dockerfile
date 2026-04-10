@@ -22,7 +22,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 # json 데이터
 WORKDIR /app
-COPY db.json .
+COPY db.json ./KB-Budget-v2
 
 # 실행
 CMD sh -c "json-server --watch db.json --port 3000 & nginx -g 'daemon off;'"
